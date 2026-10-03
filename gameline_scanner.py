@@ -101,7 +101,7 @@ def send_discord_digest(new_plays, run_timestamp):
         embed = {
             "title": f"🚨 +EV Game Line Digest ({len(sorted_plays)} Plays Found){part_tag}",
             "description": "\n\n".join(lines),
-            "color": 16753920, # Orange to visually differentiate from your Prop scanner
+            "color": 16753920,
             "footer": {"text": f"Scanned at {run_timestamp} CT • Pinnacle Baseline"}
         }
 
@@ -130,25 +130,26 @@ def fetch_and_scan():
     end_local = datetime(today.year, today.month, today.day, 23, 59, 59, tzinfo=timezone(timedelta(hours=-5)))
     
     for sport, markets in SPORTS_CONFIG.items():
-        print(f"\nFetching Schedule for {sport}...")
+        print(f"\nFetching Odds for {sport}...")
         
-        events_url = f'https://api.the-odds-api.com/v4/sports/{sport}/events'
-        events_params = {'apiKey': API_KEY}
+        # Request Pinnacle alongside Kansas books in a single bulk pull for the entire sport
+        target_books = f"pinnacle,{KS_BOOKS}"
+        odds_url = f'https://api.the-odds-api.com/v4/sports/{sport}/odds'
+        odds_params = {'apiKey': API_KEY, 'bookmakers': target_books, 'markets': markets, 'oddsFormat': 'american'}
         
         try:
-            events_res = requests.get(events_url, params=events_params, timeout=15)
+            odds_res = requests.get(odds_url, params=odds_params, timeout=15)
         except Exception as e:
-            print(f"Network error fetching events: {e}")
+            print(f"Network error fetching odds for {sport}: {e}")
             continue
             
-        if events_res.status_code != 200:
-            print(f"API Error fetching schedule for {sport}: {events_res.text}")
+        if odds_res.status_code != 200:
+            print(f"API Error fetching odds for {sport}: {odds_res.text}")
             continue
             
-        events = events_res.json()
+        events_data = odds_res.json()
         
-        for event in events:
-            event_id = event['id']
+        for event in events_data:
             game_name = f"{event['away_team']} @ {event['home_team']}"
             
             try:
@@ -161,34 +162,16 @@ def fetch_and_scan():
                     if not (start_local.astimezone(timezone.utc) <= commence_time <= end_local.astimezone(timezone.utc)):
                         continue
             except Exception:
-                pass
-            
+                continue
+                
             print(f"  -> Scanning {game_name}...")
-            
-            # Requesting Pinnacle alongside the Kansas books
-            target_books = f"pinnacle,{KS_BOOKS}"
-            odds_url = f'https://api.the-odds-api.com/v4/sports/{sport}/events/{event_id}/odds'
-            odds_params = {'apiKey': API_KEY, 'bookmakers': target_books, 'markets': markets, 'oddsFormat': 'american'}
-            
-            try:
-                odds_res = requests.get(odds_url, params=odds_params, timeout=15)
-            except Exception as e: 
-                print(f"Network error on {game_name}: {e}")
-                continue
-                
-            if odds_res.status_code != 200: 
-                print(f"API Error fetching odds for {game_name} ({sport}): {odds_res.text}")
-                continue
-                
-            event_data = odds_res.json()
             
             # Build Pinnacle True Probabilities
             pinny_true = {}
-            for book in event_data.get('bookmakers', []):
+            for book in event.get('bookmakers', []):
                 if book['key'] == 'pinnacle':
                     for market in book.get('markets', []):
                         m_key = market['key']
-                        # Strict 2-way market filter for accurate devigging
                         if len(market['outcomes']) == 2:
                             o1, o2 = market['outcomes'][0], market['outcomes'][1]
                             p1 = american_to_prob(o1['price'])
@@ -199,12 +182,11 @@ def fetch_and_scan():
                             
                             if m_key not in pinny_true: pinny_true[m_key] = {}
                             
-                            # Key format: (Name, Point)
                             pinny_true[m_key][(o1['name'], o1.get('point'))] = t1
                             pinny_true[m_key][(o2['name'], o2.get('point'))] = t2
 
             # Compare against Kansas Books
-            for book in event_data.get('bookmakers', []):
+            for book in event.get('bookmakers', []):
                 if book['key'] not in ALLOWED_BOOKS: continue
                 book_name = book['title']
                 
@@ -216,6 +198,12 @@ def fetch_and_scan():
                         name = outcome['name']
                         pt = outcome.get('point')
                         avail_odds = outcome['price']
+                        
+                        # Apply strict odds boundaries (-150 to +200)
+                        if avail_odds < 0 and avail_odds < -150:
+                            continue
+                        if avail_odds > 0 and avail_odds > 200:
+                            continue
                         
                         true_prob = pinny_true[m_key].get((name, pt))
                         if true_prob is None: continue
