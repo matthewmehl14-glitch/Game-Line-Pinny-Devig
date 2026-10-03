@@ -132,7 +132,6 @@ def fetch_and_scan():
     for sport, markets in SPORTS_CONFIG.items():
         print(f"\nFetching Odds for {sport}...")
         
-        # Request Pinnacle alongside Kansas books in a single bulk pull for the entire sport
         target_books = f"pinnacle,{KS_BOOKS}"
         odds_url = f'https://api.the-odds-api.com/v4/sports/{sport}/odds'
         odds_params = {'apiKey': API_KEY, 'bookmakers': target_books, 'markets': markets, 'oddsFormat': 'american'}
@@ -154,19 +153,13 @@ def fetch_and_scan():
             
             try:
                 commence_time = datetime.strptime(event['commence_time'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
-                if sport in ['americanfootball_nfl', 'americanfootball_ncaaf']:
-                    weekend_cutoff = end_local + timedelta(days=3)
-                    if not (start_local.astimezone(timezone.utc) <= commence_time <= weekend_cutoff.astimezone(timezone.utc)):
-                        continue
-                else:
-                    if not (start_local.astimezone(timezone.utc) <= commence_time <= end_local.astimezone(timezone.utc)):
-                        continue
+                if not (start_local.astimezone(timezone.utc) <= commence_time <= end_local.astimezone(timezone.utc)):
+                    continue
             except Exception:
                 continue
                 
             print(f"  -> Scanning {game_name}...")
             
-            # Build Pinnacle True Probabilities
             pinny_true = {}
             for book in event.get('bookmakers', []):
                 if book['key'] == 'pinnacle':
@@ -185,7 +178,6 @@ def fetch_and_scan():
                             pinny_true[m_key][(o1['name'], o1.get('point'))] = t1
                             pinny_true[m_key][(o2['name'], o2.get('point'))] = t2
 
-            # Compare against Kansas Books
             for book in event.get('bookmakers', []):
                 if book['key'] not in ALLOWED_BOOKS: continue
                 book_name = book['title']
@@ -199,7 +191,6 @@ def fetch_and_scan():
                         pt = outcome.get('point')
                         avail_odds = outcome['price']
                         
-                        # Apply strict odds boundaries (-150 to +200)
                         if avail_odds < 0 and avail_odds < -150:
                             continue
                         if avail_odds > 0 and avail_odds > 200:
