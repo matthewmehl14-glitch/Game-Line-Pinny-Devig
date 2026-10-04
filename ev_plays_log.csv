@@ -1,196 +1,196 @@
-Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly Units,Bet Amount
-2026-10-03 13:12:30,Chicago Blackhawks @ Buffalo Sabres,Total,Game Total,Over,6.5,DraftKings,+105,48.9,0.15,0.04,0.89
-2026-10-03 13:12:30,Chicago Blackhawks @ Buffalo Sabres,Spread,Buffalo Sabres,Spread,-1.5,Novig,+122,45.2,0.40,0.08,2.05
-2026-10-03 13:12:30,Carolina Hurricanes @ Philadelphia Flyers,Moneyline,Philadelphia Flyers,ML,---,Novig,+122,45.9,1.88,0.38,9.61
-2026-10-03 13:12:30,Seattle Kraken @ Edmonton Oilers,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11
-2026-10-03 13:12:30,Montréal Canadiens @ Pittsburgh Penguins,Moneyline,Montréal Canadiens,ML,---,Novig,-117,55.0,2.02,0.59,14.74
-2026-10-03 13:12:30,Montréal Canadiens @ Pittsburgh Penguins,Total,Game Total,Under,6.5,Novig,-106,51.8,0.73,0.19,4.84
-2026-10-03 13:12:30,Ottawa Senators @ Toronto Maple Leafs,Moneyline,Toronto Maple Leafs,ML,---,Novig,-106,51.7,0.53,0.14,3.51
-2026-10-03 13:12:30,Washington Capitals @ Tampa Bay Lightning,Moneyline,Washington Capitals,ML,---,Novig,+150,40.1,0.33,0.06,1.38
-2026-10-03 13:12:30,New Jersey Devils @ New York Islanders,Moneyline,New Jersey Devils,ML,---,Novig,-127,56.1,0.18,0.06,1.46
-2026-10-03 13:12:30,New Jersey Devils @ New York Islanders,Spread,New Jersey Devils,Spread,-1.5,Novig,+199,33.8,0.95,0.12,2.99
-2026-10-03 13:12:30,Dallas Stars @ Nashville Predators,Moneyline,Dallas Stars,ML,---,Novig,-125,55.8,0.41,0.13,3.18
-2026-10-03 13:12:30,St Louis Blues @ Colorado Avalanche,Spread,St Louis Blues,Spread,1.5,BetMGM,-102,51.1,1.29,0.33,8.22
-2026-10-03 13:12:30,Calgary Flames @ Vancouver Canucks,Moneyline,Calgary Flames,ML,---,Novig,+104,49.2,0.35,0.08,2.12
-2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Moneyline,Washington Commanders,ML,---,FanDuel,+188,35.3,1.54,0.20,5.11
-2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Total,Game Total,Over,47.5,Novig,+102,49.5,0.09,0.02,0.54
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Spread,Arizona Cardinals,Spread,-2.5,FanDuel,-110,52.8,0.83,0.23,5.71
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Moneyline,Arizona Cardinals,ML,---,Novig,-133,58.0,1.53,0.51,12.76
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Total,Game Total,Over,44.5,Novig,+104,49.1,0.16,0.04,0.94
-2026-10-03 13:12:30,Tennessee Titans @ Baltimore Ravens,Spread,Baltimore Ravens,Spread,-11.5,Novig,+100,50.5,0.92,0.23,5.73
-2026-10-03 13:12:30,New York Jets @ Chicago Bears,Spread,Chicago Bears,Spread,-3.5,Novig,+100,50.3,0.68,0.17,4.26
-2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Moneyline,Cincinnati Bengals,ML,---,DraftKings,-142,58.9,0.31,0.11,2.79
-2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Spread,Cincinnati Bengals,Spread,-2.5,DraftKings,-115,53.7,0.33,0.10,2.40
-2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Moneyline,Tampa Bay Buccaneers,ML,---,Novig,+163,38.0,0.02,0.00,0.08
-2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Total,Game Total,Over,39.5,Novig,+104,49.2,0.40,0.10,2.40
-2026-10-03 13:12:30,Los Angeles Rams @ Philadelphia Eagles,Spread,Los Angeles Rams,Spread,-3.5,Novig,+100,50.2,0.46,0.11,2.86
-2026-10-03 13:12:30,Miami Dolphins @ Minnesota Vikings,Total,Game Total,Under,38.5,Novig,+104,50.2,2.46,0.59,14.79
-2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Moneyline,Denver Broncos,ML,---,Novig,+133,43.0,0.17,0.03,0.78
-2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Spread,Denver Broncos,Spread,2.5,Novig,+108,48.9,1.62,0.37,9.35
-2026-10-03 13:12:30,Los Angeles Chargers @ Seattle Seahawks,Spread,Seattle Seahawks,Spread,-7.5,Novig,+111,47.6,0.48,0.11,2.71
-2026-10-03 13:12:30,Atlanta Falcons @ New Orleans Saints,Moneyline,Atlanta Falcons,ML,---,Novig,+120,45.5,0.19,0.04,1.00
-2026-10-03 13:12:31,Navy Midshipmen @ Air Force Falcons,Total,Game Total,Over,45.5,Novig,-102,51.3,1.67,0.43,10.64
-2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Moneyline,Mississippi State Bulldogs,ML,---,Novig,+194,34.6,1.70,0.22,5.47
-2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Spread,Mississippi State Bulldogs,Spread,5.5,Novig,+100,50.7,1.37,0.34,8.59
-2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Total,Game Total,Over,61.5,Novig,-102,50.7,0.34,0.09,2.18
-2026-10-03 13:12:31,West Virginia Mountaineers @ Iowa State Cyclones,Moneyline,West Virginia Mountaineers,ML,---,Novig,+144,41.1,0.38,0.07,1.63
-2026-10-03 13:12:31,Notre Dame Fighting Irish @ North Carolina Tar Heels,Total,Game Total,Under,46.5,Novig,+106,49.3,1.62,0.38,9.57
-2026-10-03 13:12:31,Stanford Cardinal @ Wake Forest Demon Deacons,Spread,Wake Forest Demon Deacons,Spread,-14.5,Novig,+100,50.2,0.46,0.11,2.86
-2026-10-03 13:12:31,Michigan State Spartans @ Wisconsin Badgers,Total,Game Total,Over,43.5,Novig,+104,49.1,0.18,0.04,1.10
-2026-10-03 13:12:31,Vanderbilt Commodores @ Georgia Bulldogs,Total,Game Total,Over,50.5,Novig,-104,51.3,0.70,0.18,4.55
-2026-10-03 13:12:31,Toledo Rockets @ Ball State Cardinals,Spread,Ball State Cardinals,Spread,20.5,Novig,+111,48.1,1.42,0.32,7.99
-2026-10-03 13:12:31,Akron Zips @ Central Michigan Chippewas,Spread,Akron Zips,Spread,6.5,Novig,+111,47.8,0.95,0.21,5.34
-2026-10-03 13:12:31,Auburn Tigers @ Tennessee Volunteers,Spread,Tennessee Volunteers,Spread,-6.5,theScore Bet,+100,51.1,2.29,0.57,14.33
-2026-10-03 13:12:31,Bowling Green Falcons @ Miami (OH) RedHawks,Spread,Bowling Green Falcons,Spread,12.5,Novig,+100,50.7,1.37,0.34,8.59
-2026-10-03 13:12:31,California Golden Bears @ UNLV Rebels,Spread,UNLV Rebels,Spread,-2.5,Novig,+104,49.5,1.07,0.26,6.40
-2026-10-03 13:12:31,Eastern Michigan Eagles @ UMass Minutemen,Total,Game Total,Over,48.5,Novig,-102,51.6,2.11,0.54,13.46
-2026-10-03 13:12:31,Florida Gators @ Missouri Tigers,Total,Game Total,Over,57.5,Novig,-106,51.6,0.20,0.05,1.35
-2026-10-03 13:12:31,Virginia Cavaliers @ Florida State Seminoles,Spread,Florida State Seminoles,Spread,1.5,Novig,-102,50.9,0.83,0.21,5.32
-2026-10-03 13:12:31,Virginia Cavaliers @ Florida State Seminoles,Total,Game Total,Over,51.5,Novig,+100,50.4,0.89,0.22,5.57
-2026-10-03 13:12:31,Old Dominion Monarchs @ Georgia State Panthers,Moneyline,Old Dominion Monarchs,ML,---,Novig,+125,44.9,1.13,0.23,5.63
-2026-10-03 13:12:31,Old Dominion Monarchs @ Georgia State Panthers,Spread,Old Dominion Monarchs,Spread,2.5,Novig,+104,49.3,0.60,0.14,3.59
-2026-10-03 13:12:31,Ohio State Buckeyes @ Iowa Hawkeyes,Spread,Iowa Hawkeyes,Spread,14.5,Novig,-108,51.9,0.02,0.01,0.14
-2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Moneyline,Kent State Golden Flashes,ML,---,Novig,+160,38.6,0.36,0.06,1.42
-2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Spread,Kent State Golden Flashes,Spread,3.5,Novig,+100,50.7,1.37,0.34,8.59
-2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Total,Game Total,Over,50.5,Novig,-104,51.2,0.46,0.12,3.02
-2026-10-03 13:12:31,Louisville Cardinals @ NC State Wolfpack,Moneyline,NC State Wolfpack,ML,---,Novig,+147,41.0,1.21,0.20,5.12
-2026-10-03 13:12:31,Wyoming Cowboys @ North Dakota State Bison,Total,Game Total,Over,44.5,Novig,+104,49.6,1.09,0.26,6.56
-2026-10-03 13:12:31,Maryland Terrapins @ Nebraska Cornhuskers,Total,Game Total,Over,52.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 13:12:31,Purdue Boilermakers @ Illinois Fighting Illini,Total,Game Total,Over,62.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 13:12:31,Kentucky Wildcats @ South Carolina Gamecocks,Moneyline,Kentucky Wildcats,ML,---,Novig,+122,45.2,0.40,0.08,2.05
-2026-10-03 13:12:31,Kentucky Wildcats @ South Carolina Gamecocks,Spread,Kentucky Wildcats,Spread,2.5,Novig,+102,49.5,0.07,0.02,0.46
-2026-10-03 13:12:31,Oregon State Beavers @ Colorado State Rams,Spread,Colorado State Rams,Spread,6.5,Novig,+111,48.1,1.42,0.32,7.99
-2026-10-03 13:12:31,UTSA Roadrunners @ Rice Owls,Spread,UTSA Roadrunners,Spread,-11.5,Novig,-102,51.7,2.40,0.61,15.32
-2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Moneyline,Louisiana Tech Bulldogs,ML,---,Novig,+108,48.4,0.66,0.15,3.83
-2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Spread,Army Black Knights,Spread,-1.5,Novig,+104,49.1,0.13,0.03,0.78
-2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Spread,Louisiana Tech Bulldogs,Spread,1.5,theScore Bet,+100,50.9,1.83,0.46,11.46
-2026-10-03 13:12:31,Temple Owls @ South Florida Bulls,Moneyline,Temple Owls,ML,---,theScore Bet,+195,34.0,0.26,0.03,0.83
-2026-10-03 13:12:31,Washington Huskies @ USC Trojans,Total,Game Total,Over,57.5,Novig,-102,51.4,1.87,0.48,11.92
-2026-10-03 13:12:31,Texas Tech Red Raiders @ Colorado Buffaloes,Spread,Texas Tech Red Raiders,Spread,-13.5,Novig,+100,50.5,0.92,0.23,5.73
-2026-10-03 13:12:31,Texas Tech Red Raiders @ Colorado Buffaloes,Total,Game Total,Under,49.5,Novig,+104,50.8,3.58,0.86,21.51
-2026-10-03 13:12:31,Fresno State Bulldogs @ Washington State Cougars,Moneyline,Fresno State Bulldogs,ML,---,Novig,+113,47.1,0.30,0.07,1.66
-2026-10-03 13:12:31,Baylor Bears @ Arizona State Sun Devils,Spread,Arizona State Sun Devils,Spread,-3.5,Novig,+100,50.7,1.37,0.34,8.59
-2026-10-03 13:12:31,Texas State Bobcats @ San Diego State Aztecs,Total,Game Total,Over,57.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 13:12:31,Cincinnati Bearcats @ Arizona Wildcats,Total,Game Total,Over,55.5,Novig,-104,51.1,0.26,0.07,1.71
-2026-10-03 13:12:31,San Jose State Spartans @ Hawaii Rainbow Warriors,Moneyline,San Jose State Spartans,ML,---,Novig,+135,42.6,0.03,0.00,0.12
----,=== GAMELINE RUN: 2026-10-03 13:51:32 (11 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 13:51:33,Boston Bruins @ Minnesota Wild,Total,Game Total,Over,6.5,Novig,+111,47.4,0.02,0.00,0.10
-2026-10-03 13:51:33,St Louis Blues @ Colorado Avalanche,Total,Game Total,Over,6.5,Novig,+113,47.4,0.97,0.21,5.34
-2026-10-03 13:51:33,Boston College Eagles @ SMU Mustangs,Total,Game Total,Under,55.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 13:51:33,Syracuse Orange @ UConn Huskies,Spread,Syracuse Orange,Spread,-6.5,Novig,-106,51.5,0.05,0.01,0.31
-2026-10-03 13:51:33,California Golden Bears @ UNLV Rebels,Moneyline,UNLV Rebels,ML,---,Novig,-113,53.1,0.14,0.04,0.98
-2026-10-03 13:51:33,California Golden Bears @ UNLV Rebels,Spread,California Golden Bears,Spread,2.5,theScore Bet,-105,51.6,0.75,0.20,4.94
-2026-10-03 13:51:33,Florida Gators @ Missouri Tigers,Spread,Missouri Tigers,Spread,5.5,Novig,+100,50.7,1.37,0.34,8.59
-2026-10-03 13:51:33,Louisville Cardinals @ NC State Wolfpack,Total,Game Total,Over,57.5,Novig,+100,50.2,0.45,0.11,2.78
-2026-10-03 13:51:33,Samford Bulldogs @ UAB Blazers,Spread,UAB Blazers,Spread,-30.5,Novig,-106,51.8,0.73,0.19,4.85
-2026-10-03 13:51:33,UTSA Roadrunners @ Rice Owls,Total,Game Total,Under,55.5,Novig,+100,50.8,1.55,0.39,9.67
-2026-10-03 13:51:33,Texas State Bobcats @ San Diego State Aztecs,Spread,Texas State Bobcats,Spread,-9.5,Novig,-104,51.1,0.33,0.08,2.11
----,=== GAMELINE RUN: 2026-10-03 15:53:21 (19 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 15:53:21,Utah Mammoth @ Columbus Blue Jackets,Moneyline,Utah Mammoth,ML,---,Novig,-106,51.5,0.09,0.02,0.57
-2026-10-03 15:53:21,Washington Capitals @ Tampa Bay Lightning,Spread,Tampa Bay Lightning,Spread,-1.5,Novig,+150,40.1,0.29,0.05,1.20
-2026-10-03 15:53:21,Washington Capitals @ Tampa Bay Lightning,Total,Game Total,Under,6.5,Novig,-111,52.8,0.40,0.11,2.76
-2026-10-03 15:53:21,New Jersey Devils @ New York Islanders,Moneyline,New York Islanders,ML,---,Novig,+127,44.2,0.38,0.07,1.85
-2026-10-03 15:53:22,Navy Midshipmen @ Air Force Falcons,Moneyline,Navy Midshipmen,ML,---,Novig,+135,43.3,1.71,0.32,7.91
-2026-10-03 15:53:22,Middle Tennessee Blue Raiders @ Kansas Jayhawks,Total,Game Total,Over,50.5,Novig,-102,50.7,0.34,0.09,2.18
-2026-10-03 15:53:22,Stanford Cardinal @ Wake Forest Demon Deacons,Spread,Stanford Cardinal,Spread,14.5,Novig,+100,50.5,0.92,0.23,5.73
-2026-10-03 15:53:22,Alabama Crimson Tide @ Mississippi State Bulldogs,Total,Game Total,Under,62.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 15:53:22,California Golden Bears @ UNLV Rebels,Spread,UNLV Rebels,Spread,-1.5,Novig,+102,49.8,0.54,0.13,3.29
-2026-10-03 15:53:22,Florida Gators @ Missouri Tigers,Moneyline,Missouri Tigers,ML,---,Novig,+194,34.1,0.25,0.03,0.81
-2026-10-03 15:53:22,Ohio State Buckeyes @ Iowa Hawkeyes,Spread,Ohio State Buckeyes,Spread,-14.5,Novig,+106,48.9,0.64,0.15,3.77
-2026-10-03 15:53:22,Samford Bulldogs @ UAB Blazers,Total,Game Total,Under,54.5,Novig,+100,50.2,0.43,0.11,2.71
-2026-10-03 15:53:22,Maryland Terrapins @ Nebraska Cornhuskers,Spread,Maryland Terrapins,Spread,14.5,Novig,+102,49.8,0.54,0.13,3.29
-2026-10-03 15:53:22,Purdue Boilermakers @ Illinois Fighting Illini,Total,Game Total,Under,61.5,Novig,+102,49.8,0.55,0.13,3.37
-2026-10-03 15:53:22,BYU Cougars @ TCU Horned Frogs,Moneyline,TCU Horned Frogs,ML,---,Novig,+199,33.7,0.86,0.11,2.69
-2026-10-03 15:53:22,Georgia Southern Eagles @ Coastal Carolina Chanticleers,Moneyline,Coastal Carolina Chanticleers,ML,---,Novig,+115,46.7,0.32,0.07,1.76
-2026-10-03 15:53:22,Fresno State Bulldogs @ Washington State Cougars,Total,Game Total,Under,44.5,Novig,+100,50.7,1.34,0.33,8.35
-2026-10-03 15:53:22,Baylor Bears @ Arizona State Sun Devils,Moneyline,Baylor Bears,ML,---,Novig,+160,39.3,2.16,0.34,8.46
-2026-10-03 15:53:22,Baylor Bears @ Arizona State Sun Devils,Total,Game Total,Under,48.5,Novig,+104,49.3,0.64,0.15,3.83
----,=== GAMELINE RUN: 2026-10-03 17:20:25 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 17:20:26,Chicago Blackhawks @ Buffalo Sabres,Total,Game Total,Under,6.5,Novig,-104,51.3,0.53,0.14,3.47
-2026-10-03 17:20:26,Seattle Kraken @ Edmonton Oilers,Moneyline,Seattle Kraken,ML,---,Novig,+182,35.7,0.66,0.09,2.28
-2026-10-03 17:20:26,Washington Capitals @ Tampa Bay Lightning,Spread,Washington Capitals,Spread,1.5,BetMGM,-140,58.7,0.62,0.22,5.46
-2026-10-03 17:20:26,Dallas Stars @ Nashville Predators,Spread,Dallas Stars,Spread,-1.5,Novig,+199,33.9,1.29,0.16,4.04
-2026-10-03 17:20:26,Michigan Wolverines @ Minnesota Golden Gophers,Moneyline,Michigan Wolverines,ML,---,FanDuel,-136,64.8,12.38,4.21,105.24
-2026-10-03 17:20:26,West Virginia Mountaineers @ Iowa State Cyclones,Moneyline,Iowa State Cyclones,ML,---,FanDuel,-122,66.4,20.84,6.36,158.89
-2026-10-03 17:20:26,Auburn Tigers @ Tennessee Volunteers,Total,Game Total,Under,54.5,Novig,-106,51.9,0.83,0.22,5.52
-2026-10-03 17:20:26,Bowling Green Falcons @ Miami (OH) RedHawks,Total,Game Total,Under,41.5,Novig,-104,51.1,0.26,0.07,1.71
-2026-10-03 17:20:26,Virginia Cavaliers @ Florida State Seminoles,Total,Game Total,Under,51.5,Novig,+102,49.6,0.10,0.02,0.62
-2026-10-03 17:20:26,Texas Southern Tigers @ Florida Atlantic Owls,Total,Game Total,Under,62.5,Novig,+100,50.2,0.43,0.11,2.71
-2026-10-03 17:20:26,Texas State Bobcats @ San Diego State Aztecs,Spread,San Diego State Aztecs,Spread,9.5,Novig,+104,49.3,0.60,0.14,3.59
-2026-10-03 17:20:26,San Jose State Spartans @ Hawaii Rainbow Warriors,Moneyline,Hawaii Rainbow Warriors,ML,---,FanDuel,-137,58.2,0.67,0.23,5.75
----,=== GAMELINE RUN: 2026-10-03 18:28:20 (17 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 18:28:21,Carolina Hurricanes @ Philadelphia Flyers,Moneyline,Carolina Hurricanes,ML,---,Novig,-122,55.0,0.09,0.03,0.68
-2026-10-03 18:28:21,Boston Bruins @ Minnesota Wild,Moneyline,Boston Bruins,ML,---,Novig,+190,34.5,0.16,0.02,0.52
-2026-10-03 18:28:21,Boston Bruins @ Minnesota Wild,Spread,Minnesota Wild,Spread,-1.5,Novig,+133,43.2,0.59,0.11,2.76
-2026-10-03 18:28:21,Los Angeles Kings @ San Jose Sharks,Moneyline,Los Angeles Kings,ML,---,Novig,+102,49.8,0.53,0.13,3.25
-2026-10-03 18:28:21,Michigan Wolverines @ Minnesota Golden Gophers,Moneyline,Minnesota Golden Gophers,ML,---,BetMGM,+200,36.0,8.09,1.01,25.29
-2026-10-03 18:28:21,Michigan Wolverines @ Minnesota Golden Gophers,Spread,Michigan Wolverines,Spread,-3.5,BetMGM,-105,51.3,0.16,0.04,1.04
-2026-10-03 18:28:21,Syracuse Orange @ UConn Huskies,Total,Game Total,Over,67.5,FanDuel,-110,54.1,3.32,0.91,22.84
-2026-10-03 18:28:21,Notre Dame Fighting Irish @ North Carolina Tar Heels,Spread,North Carolina Tar Heels,Spread,14.5,theScore Bet,+110,51.4,7.86,1.79,44.66
-2026-10-03 18:28:21,Florida Gators @ Missouri Tigers,Total,Game Total,Under,57.5,Novig,+104,49.3,0.64,0.15,3.83
-2026-10-03 18:28:21,Old Dominion Monarchs @ Georgia State Panthers,Total,Game Total,Under,51.5,Novig,+102,49.6,0.10,0.02,0.62
-2026-10-03 18:28:21,Kentucky Wildcats @ South Carolina Gamecocks,Spread,South Carolina Gamecocks,Spread,-2.5,Novig,+102,50.0,1.00,0.25,6.13
-2026-10-03 18:28:21,UL Monroe Warhawks @ South Alabama Jaguars,Spread,UL Monroe Warhawks,Spread,13.5,Novig,+106,48.9,0.64,0.15,3.77
-2026-10-03 18:28:21,Utah State Aggies @ Boise State Broncos,Total,Game Total,Under,51.5,Novig,-106,51.9,0.83,0.22,5.52
-2026-10-03 18:28:21,Miami Hurricanes @ Clemson Tigers,Spread,Miami Hurricanes,Spread,-15.5,Novig,-102,50.7,0.38,0.10,2.43
-2026-10-03 18:28:21,Temple Owls @ South Florida Bulls,Spread,Temple Owls,Spread,5.5,Novig,+104,49.8,1.53,0.37,9.21
-2026-10-03 18:28:21,Arkansas State Red Wolves @ Louisiana Ragin Cajuns,Total,Game Total,Over,49.5,Novig,+102,49.6,0.10,0.02,0.62
-2026-10-03 18:28:21,Fresno State Bulldogs @ Washington State Cougars,Spread,Fresno State Bulldogs,Spread,2.5,Novig,-102,50.7,0.38,0.10,2.43
----,=== GAMELINE RUN: 2026-10-03 20:11:33 (5 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 20:11:34,Washington Capitals @ Tampa Bay Lightning,Total,Game Total,Over,6.5,Novig,+113,47.2,0.50,0.11,2.78
-2026-10-03 20:11:34,St Louis Blues @ Colorado Avalanche,Spread,Colorado Avalanche,Spread,-1.5,Novig,-102,51.7,2.40,0.61,15.32
-2026-10-03 20:11:34,Texas Southern Tigers @ Florida Atlantic Owls,Total,Game Total,Over,62.5,theScore Bet,+100,50.2,0.43,0.11,2.71
-2026-10-03 20:11:34,Georgia Southern Eagles @ Coastal Carolina Chanticleers,Moneyline,Georgia Southern Eagles,ML,---,Novig,-117,54.0,0.09,0.03,0.64
-2026-10-03 20:11:34,Fresno State Bulldogs @ Washington State Cougars,Moneyline,Washington State Cougars,ML,---,Novig,-115,53.5,0.11,0.03,0.81
----,=== GAMELINE RUN: 2026-10-03 21:11:23 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 21:11:23,Seattle Kraken @ Edmonton Oilers,Spread,Edmonton Oilers,Spread,-1.5,Novig,+135,42.8,0.61,0.11,2.81
-2026-10-03 21:11:23,Calgary Flames @ Vancouver Canucks,Moneyline,Vancouver Canucks,ML,---,Novig,-104,51.2,0.36,0.09,2.33
-2026-10-03 21:11:24,Ohio Bobcats @ Kent State Golden Flashes,Spread,Ohio Bobcats,Spread,-7.5,DraftKings,+109,48.7,1.70,0.39,9.77
-2026-10-03 21:11:24,Bowling Green Falcons @ Miami (OH) RedHawks,Moneyline,Bowling Green Falcons,ML,---,Novig,+117,46.7,1.38,0.30,7.40
-2026-10-03 21:11:24,Louisville Cardinals @ NC State Wolfpack,Moneyline,Louisville Cardinals,ML,---,Novig,+130,45.4,4.44,0.85,21.34
-2026-10-03 21:11:24,Florida Gators @ Missouri Tigers,Moneyline,Florida Gators,ML,---,DraftKings,+173,43.2,17.91,2.59,64.72
-2026-10-03 21:11:24,Florida Gators @ Missouri Tigers,Total,Game Total,Under,58.5,BetMGM,-108,52.0,0.06,0.02,0.41
-2026-10-03 21:11:24,Purdue Boilermakers @ Illinois Fighting Illini,Moneyline,Illinois Fighting Illini,ML,---,FanDuel,-136,58.8,2.05,0.70,17.43
-2026-10-03 21:11:24,BYU Cougars @ TCU Horned Frogs,Spread,TCU Horned Frogs,Spread,5.5,theScore Bet,+100,50.2,0.46,0.11,2.86
-2026-10-03 21:11:24,Utah State Aggies @ Boise State Broncos,Spread,Utah State Aggies,Spread,19.5,Novig,-104,51.4,0.78,0.20,5.05
-2026-10-03 21:11:24,Miami Hurricanes @ Clemson Tigers,Spread,Clemson Tigers,Spread,14.5,Novig,+102,50.5,1.93,0.47,11.80
-2026-10-03 21:11:24,Washington Huskies @ USC Trojans,Spread,Washington Huskies,Spread,7.5,DraftKings,-105,51.4,0.31,0.08,2.01
----,=== GAMELINE RUN: 2026-10-03 23:28:25 (10 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-03 23:28:25,Chicago Blackhawks @ Buffalo Sabres,Moneyline,Buffalo Sabres,ML,---,DraftKings,-125,66.6,19.92,6.22,155.62
-2026-10-03 23:28:25,Utah Mammoth @ Columbus Blue Jackets,Total,Game Total,Over,5.5,DraftKings,+124,45.5,1.88,0.38,9.46
-2026-10-03 23:28:25,Utah Mammoth @ Columbus Blue Jackets,Moneyline,Columbus Blue Jackets,ML,---,Novig,+102,49.8,0.56,0.14,3.45
-2026-10-03 23:28:25,Dallas Stars @ Nashville Predators,Moneyline,Nashville Predators,ML,---,Novig,+130,43.6,0.22,0.04,1.08
-2026-10-03 23:28:26,Maryland Terrapins @ Nebraska Cornhuskers,Spread,Maryland Terrapins,Spread,18.5,BetMGM,+170,44.6,20.32,2.99,74.72
-2026-10-03 23:28:26,Kentucky Wildcats @ South Carolina Gamecocks,Moneyline,South Carolina Gamecocks,ML,---,Novig,+111,47.4,0.02,0.01,0.13
-2026-10-03 23:28:26,Utah State Aggies @ Boise State Broncos,Spread,Boise State Broncos,Spread,-19.5,Novig,+104,49.5,1.07,0.26,6.40
-2026-10-03 23:28:26,Temple Owls @ South Florida Bulls,Total,Game Total,Over,50.5,Novig,+104,49.3,0.64,0.15,3.83
-2026-10-03 23:28:26,Texas Tech Red Raiders @ Colorado Buffaloes,Spread,Colorado Buffaloes,Spread,13.5,Novig,+104,49.5,1.07,0.26,6.40
-2026-10-03 23:28:26,Texas Tech Red Raiders @ Colorado Buffaloes,Total,Game Total,Under,50.5,Novig,+102,50.0,1.00,0.25,6.13
----,=== GAMELINE RUN: 2026-10-04 00:36:08 (5 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-04 00:36:09,Chicago Blackhawks @ Buffalo Sabres,Moneyline,Chicago Blackhawks,ML,---,theScore Bet,+190,38.2,10.83,1.43,35.63
-2026-10-04 00:36:09,Carolina Hurricanes @ Philadelphia Flyers,Total,Game Total,Over,5.5,DraftKings,+100,50.2,0.43,0.11,2.71
-2026-10-04 00:36:09,Seattle Kraken @ Edmonton Oilers,Total,Game Total,Over,5.5,BetMGM,+115,46.6,0.14,0.03,0.78
-2026-10-04 00:36:09,Montréal Canadiens @ Pittsburgh Penguins,Total,Game Total,Over,7.5,DraftKings,+110,48.7,2.27,0.52,12.89
-2026-10-04 00:36:09,Montréal Canadiens @ Pittsburgh Penguins,Spread,Montréal Canadiens,Spread,2.5,BetMGM,-110,53.4,1.99,0.55,13.66
----,=== GAMELINE RUN: 2026-10-04 02:59:08 (8 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-04 02:59:09,St Louis Blues @ Colorado Avalanche,Spread,Colorado Avalanche,Spread,-6.5,Novig,+120,45.9,0.97,0.20,5.03
-2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Moneyline,San Jose Sharks,ML,---,Novig,+199,33.8,1.03,0.13,3.25
-2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Spread,Los Angeles Kings,Spread,-1.5,Novig,+147,42.5,4.90,0.83,20.82
-2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Total,Game Total,Under,5.5,Novig,-127,56.0,0.13,0.04,1.01
-2026-10-04 02:59:09,Calgary Flames @ Vancouver Canucks,Total,Game Total,Over,5.5,DraftKings,+120,49.6,9.05,1.88,47.12
-2026-10-04 02:59:09,Calgary Flames @ Vancouver Canucks,Spread,Vancouver Canucks,Spread,1.5,Novig,-135,57.9,0.82,0.28,6.92
-2026-10-04 02:59:10,Washington Huskies @ USC Trojans,Moneyline,Washington Huskies,ML,---,Novig,+182,42.4,19.64,2.70,67.43
-2026-10-04 02:59:10,San Jose State Spartans @ Hawaii Rainbow Warriors,Total,Game Total,Under,50.5,Novig,+104,49.6,1.09,0.26,6.56
----,=== GAMELINE RUN: 2026-10-04 12:55:49 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
-2026-10-04 12:55:49,Golden State Warriors @ Los Angeles Clippers,Moneyline,Los Angeles Clippers,ML,---,DraftKings,+136,42.5,0.38,0.07,1.74
-2026-10-04 12:55:50,Winnipeg Jets @ Detroit Red Wings,Moneyline,Detroit Red Wings,ML,---,Novig,+100,50.2,0.46,0.12,2.90
-2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Moneyline,New York Rangers,ML,---,Novig,-120,55.0,0.84,0.25,6.30
-2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Total,Game Total,Under,5.5,Novig,+108,48.5,0.92,0.21,5.33
-2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Moneyline,Anaheim Ducks,ML,---,Novig,+125,44.6,0.36,0.07,1.80
-2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11
-2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Spread,Indianapolis Colts,Spread,-4.5,Novig,-104,51.4,0.81,0.21,5.28
-2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Total,Game Total,Under,46.5,Novig,+104,49.5,1.07,0.26,6.40
-2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Moneyline,San Francisco 49ers,ML,---,Novig,-135,57.6,0.23,0.08,1.96
-2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Total,Game Total,Over,48.5,Novig,+104,49.8,1.53,0.37,9.21
-2026-10-04 12:55:50,Kansas City Chiefs @ Las Vegas Raiders,Spread,Kansas City Chiefs,Spread,-4.5,Novig,-104,51.2,0.36,0.09,2.33
-2026-10-04 12:55:50,Detroit Lions @ Carolina Panthers,Total,Game Total,Over,51.5,Novig,+100,50.7,1.37,0.34,8.59
+Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly Units,Bet Amount,Result,Net Units
+2026-10-03 13:12:30,Chicago Blackhawks @ Buffalo Sabres,Total,Game Total,Over,6.5,DraftKings,+105,48.9,0.15,0.04,0.89,WIN,0.04
+2026-10-03 13:12:30,Chicago Blackhawks @ Buffalo Sabres,Spread,Buffalo Sabres,Spread,-1.5,Novig,+122,45.2,0.40,0.08,2.05,LOSS,-0.08
+2026-10-03 13:12:30,Carolina Hurricanes @ Philadelphia Flyers,Moneyline,Philadelphia Flyers,ML,---,Novig,+122,45.9,1.88,0.38,9.61,LOSS,-0.38
+2026-10-03 13:12:30,Seattle Kraken @ Edmonton Oilers,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11,LOSS,-0.08
+2026-10-03 13:12:30,Montréal Canadiens @ Pittsburgh Penguins,Moneyline,Montréal Canadiens,ML,---,Novig,-117,55.0,2.02,0.59,14.74,LOSS,-0.59
+2026-10-03 13:12:30,Montréal Canadiens @ Pittsburgh Penguins,Total,Game Total,Under,6.5,Novig,-106,51.8,0.73,0.19,4.84,LOSS,-0.19
+2026-10-03 13:12:30,Ottawa Senators @ Toronto Maple Leafs,Moneyline,Toronto Maple Leafs,ML,---,Novig,-106,51.7,0.53,0.14,3.51,LOSS,-0.14
+2026-10-03 13:12:30,Washington Capitals @ Tampa Bay Lightning,Moneyline,Washington Capitals,ML,---,Novig,+150,40.1,0.33,0.06,1.38,LOSS,-0.06
+2026-10-03 13:12:30,New Jersey Devils @ New York Islanders,Moneyline,New Jersey Devils,ML,---,Novig,-127,56.1,0.18,0.06,1.46,LOSS,-0.06
+2026-10-03 13:12:30,New Jersey Devils @ New York Islanders,Spread,New Jersey Devils,Spread,-1.5,Novig,+199,33.8,0.95,0.12,2.99,LOSS,-0.12
+2026-10-03 13:12:30,Dallas Stars @ Nashville Predators,Moneyline,Dallas Stars,ML,---,Novig,-125,55.8,0.41,0.13,3.18,LOSS,-0.13
+2026-10-03 13:12:30,St Louis Blues @ Colorado Avalanche,Spread,St Louis Blues,Spread,1.5,BetMGM,-102,51.1,1.29,0.33,8.22,LOSS,-0.33
+2026-10-03 13:12:30,Calgary Flames @ Vancouver Canucks,Moneyline,Calgary Flames,ML,---,Novig,+104,49.2,0.35,0.08,2.12,LOSS,-0.08
+2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Moneyline,Washington Commanders,ML,---,FanDuel,+188,35.3,1.54,0.20,5.11,PENDING,0.00
+2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Total,Game Total,Over,47.5,Novig,+102,49.5,0.09,0.02,0.54,PENDING,0.00
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Spread,Arizona Cardinals,Spread,-2.5,FanDuel,-110,52.8,0.83,0.23,5.71,PENDING,0.00
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Moneyline,Arizona Cardinals,ML,---,Novig,-133,58.0,1.53,0.51,12.76,PENDING,0.00
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Total,Game Total,Over,44.5,Novig,+104,49.1,0.16,0.04,0.94,PENDING,0.00
+2026-10-03 13:12:30,Tennessee Titans @ Baltimore Ravens,Spread,Baltimore Ravens,Spread,-11.5,Novig,+100,50.5,0.92,0.23,5.73,PENDING,0.00
+2026-10-03 13:12:30,New York Jets @ Chicago Bears,Spread,Chicago Bears,Spread,-3.5,Novig,+100,50.3,0.68,0.17,4.26,PENDING,0.00
+2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Moneyline,Cincinnati Bengals,ML,---,DraftKings,-142,58.9,0.31,0.11,2.79,PENDING,0.00
+2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Spread,Cincinnati Bengals,Spread,-2.5,DraftKings,-115,53.7,0.33,0.10,2.40,PENDING,0.00
+2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Moneyline,Tampa Bay Buccaneers,ML,---,Novig,+163,38.0,0.02,0.00,0.08,PENDING,0.00
+2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Total,Game Total,Over,39.5,Novig,+104,49.2,0.40,0.10,2.40,PENDING,0.00
+2026-10-03 13:12:30,Los Angeles Rams @ Philadelphia Eagles,Spread,Los Angeles Rams,Spread,-3.5,Novig,+100,50.2,0.46,0.11,2.86,PENDING,0.00
+2026-10-03 13:12:30,Miami Dolphins @ Minnesota Vikings,Total,Game Total,Under,38.5,Novig,+104,50.2,2.46,0.59,14.79,PENDING,0.00
+2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Moneyline,Denver Broncos,ML,---,Novig,+133,43.0,0.17,0.03,0.78,PENDING,0.00
+2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Spread,Denver Broncos,Spread,2.5,Novig,+108,48.9,1.62,0.37,9.35,PENDING,0.00
+2026-10-03 13:12:30,Los Angeles Chargers @ Seattle Seahawks,Spread,Seattle Seahawks,Spread,-7.5,Novig,+111,47.6,0.48,0.11,2.71,PENDING,0.00
+2026-10-03 13:12:30,Atlanta Falcons @ New Orleans Saints,Moneyline,Atlanta Falcons,ML,---,Novig,+120,45.5,0.19,0.04,1.00,PENDING,0.00
+2026-10-03 13:12:31,Navy Midshipmen @ Air Force Falcons,Total,Game Total,Over,45.5,Novig,-102,51.3,1.67,0.43,10.64,LOSS,-0.43
+2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Moneyline,Mississippi State Bulldogs,ML,---,Novig,+194,34.6,1.70,0.22,5.47,LOSS,-0.22
+2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Spread,Mississippi State Bulldogs,Spread,5.5,Novig,+100,50.7,1.37,0.34,8.59,LOSS,-0.34
+2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Total,Game Total,Over,61.5,Novig,-102,50.7,0.34,0.09,2.18,WIN,0.09
+2026-10-03 13:12:31,West Virginia Mountaineers @ Iowa State Cyclones,Moneyline,West Virginia Mountaineers,ML,---,Novig,+144,41.1,0.38,0.07,1.63,LOSS,-0.07
+2026-10-03 13:12:31,Notre Dame Fighting Irish @ North Carolina Tar Heels,Total,Game Total,Under,46.5,Novig,+106,49.3,1.62,0.38,9.57,LOSS,-0.38
+2026-10-03 13:12:31,Stanford Cardinal @ Wake Forest Demon Deacons,Spread,Wake Forest Demon Deacons,Spread,-14.5,Novig,+100,50.2,0.46,0.11,2.86,WIN,0.11
+2026-10-03 13:12:31,Michigan State Spartans @ Wisconsin Badgers,Total,Game Total,Over,43.5,Novig,+104,49.1,0.18,0.04,1.10,LOSS,-0.04
+2026-10-03 13:12:31,Vanderbilt Commodores @ Georgia Bulldogs,Total,Game Total,Over,50.5,Novig,-104,51.3,0.70,0.18,4.55,WIN,0.17
+2026-10-03 13:12:31,Toledo Rockets @ Ball State Cardinals,Spread,Ball State Cardinals,Spread,20.5,Novig,+111,48.1,1.42,0.32,7.99,WIN,0.36
+2026-10-03 13:12:31,Akron Zips @ Central Michigan Chippewas,Spread,Akron Zips,Spread,6.5,Novig,+111,47.8,0.95,0.21,5.34,LOSS,-0.21
+2026-10-03 13:12:31,Auburn Tigers @ Tennessee Volunteers,Spread,Tennessee Volunteers,Spread,-6.5,theScore Bet,+100,51.1,2.29,0.57,14.33,WIN,0.57
+2026-10-03 13:12:31,Bowling Green Falcons @ Miami (OH) RedHawks,Spread,Bowling Green Falcons,Spread,12.5,Novig,+100,50.7,1.37,0.34,8.59,WIN,0.34
+2026-10-03 13:12:31,California Golden Bears @ UNLV Rebels,Spread,UNLV Rebels,Spread,-2.5,Novig,+104,49.5,1.07,0.26,6.40,WIN,0.27
+2026-10-03 13:12:31,Eastern Michigan Eagles @ UMass Minutemen,Total,Game Total,Over,48.5,Novig,-102,51.6,2.11,0.54,13.46,WIN,0.53
+2026-10-03 13:12:31,Florida Gators @ Missouri Tigers,Total,Game Total,Over,57.5,Novig,-106,51.6,0.20,0.05,1.35,WIN,0.05
+2026-10-03 13:12:31,Virginia Cavaliers @ Florida State Seminoles,Spread,Florida State Seminoles,Spread,1.5,Novig,-102,50.9,0.83,0.21,5.32,WIN,0.21
+2026-10-03 13:12:31,Virginia Cavaliers @ Florida State Seminoles,Total,Game Total,Over,51.5,Novig,+100,50.4,0.89,0.22,5.57,LOSS,-0.22
+2026-10-03 13:12:31,Old Dominion Monarchs @ Georgia State Panthers,Moneyline,Old Dominion Monarchs,ML,---,Novig,+125,44.9,1.13,0.23,5.63,LOSS,-0.23
+2026-10-03 13:12:31,Old Dominion Monarchs @ Georgia State Panthers,Spread,Old Dominion Monarchs,Spread,2.5,Novig,+104,49.3,0.60,0.14,3.59,LOSS,-0.14
+2026-10-03 13:12:31,Ohio State Buckeyes @ Iowa Hawkeyes,Spread,Iowa Hawkeyes,Spread,14.5,Novig,-108,51.9,0.02,0.01,0.14,LOSS,-0.01
+2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Moneyline,Kent State Golden Flashes,ML,---,Novig,+160,38.6,0.36,0.06,1.42,LOSS,-0.06
+2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Spread,Kent State Golden Flashes,Spread,3.5,Novig,+100,50.7,1.37,0.34,8.59,WIN,0.34
+2026-10-03 13:12:31,Ohio Bobcats @ Kent State Golden Flashes,Total,Game Total,Over,50.5,Novig,-104,51.2,0.46,0.12,3.02,LOSS,-0.12
+2026-10-03 13:12:31,Louisville Cardinals @ NC State Wolfpack,Moneyline,NC State Wolfpack,ML,---,Novig,+147,41.0,1.21,0.20,5.12,WIN,0.29
+2026-10-03 13:12:31,Wyoming Cowboys @ North Dakota State Bison,Total,Game Total,Over,44.5,Novig,+104,49.6,1.09,0.26,6.56,LOSS,-0.26
+2026-10-03 13:12:31,Maryland Terrapins @ Nebraska Cornhuskers,Total,Game Total,Over,52.5,Novig,+102,50.0,1.00,0.25,6.13,WIN,0.26
+2026-10-03 13:12:31,Purdue Boilermakers @ Illinois Fighting Illini,Total,Game Total,Over,62.5,Novig,+102,50.0,1.00,0.25,6.13,LOSS,-0.25
+2026-10-03 13:12:31,Kentucky Wildcats @ South Carolina Gamecocks,Moneyline,Kentucky Wildcats,ML,---,Novig,+122,45.2,0.40,0.08,2.05,WIN,0.10
+2026-10-03 13:12:31,Kentucky Wildcats @ South Carolina Gamecocks,Spread,Kentucky Wildcats,Spread,2.5,Novig,+102,49.5,0.07,0.02,0.46,WIN,0.02
+2026-10-03 13:12:31,Oregon State Beavers @ Colorado State Rams,Spread,Colorado State Rams,Spread,6.5,Novig,+111,48.1,1.42,0.32,7.99,LOSS,-0.32
+2026-10-03 13:12:31,UTSA Roadrunners @ Rice Owls,Spread,UTSA Roadrunners,Spread,-11.5,Novig,-102,51.7,2.40,0.61,15.32,LOSS,-0.61
+2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Moneyline,Louisiana Tech Bulldogs,ML,---,Novig,+108,48.4,0.66,0.15,3.83,WIN,0.16
+2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Spread,Army Black Knights,Spread,-1.5,Novig,+104,49.1,0.13,0.03,0.78,LOSS,-0.03
+2026-10-03 13:12:31,Army Black Knights @ Louisiana Tech Bulldogs,Spread,Louisiana Tech Bulldogs,Spread,1.5,theScore Bet,+100,50.9,1.83,0.46,11.46,WIN,0.46
+2026-10-03 13:12:31,Temple Owls @ South Florida Bulls,Moneyline,Temple Owls,ML,---,theScore Bet,+195,34.0,0.26,0.03,0.83,WIN,0.06
+2026-10-03 13:12:31,Washington Huskies @ USC Trojans,Total,Game Total,Over,57.5,Novig,-102,51.4,1.87,0.48,11.92,LOSS,-0.48
+2026-10-03 13:12:31,Texas Tech Red Raiders @ Colorado Buffaloes,Spread,Texas Tech Red Raiders,Spread,-13.5,Novig,+100,50.5,0.92,0.23,5.73,WIN,0.23
+2026-10-03 13:12:31,Texas Tech Red Raiders @ Colorado Buffaloes,Total,Game Total,Under,49.5,Novig,+104,50.8,3.58,0.86,21.51,WIN,0.89
+2026-10-03 13:12:31,Fresno State Bulldogs @ Washington State Cougars,Moneyline,Fresno State Bulldogs,ML,---,Novig,+113,47.1,0.30,0.07,1.66,WIN,0.08
+2026-10-03 13:12:31,Baylor Bears @ Arizona State Sun Devils,Spread,Arizona State Sun Devils,Spread,-3.5,Novig,+100,50.7,1.37,0.34,8.59,LOSS,-0.34
+2026-10-03 13:12:31,Texas State Bobcats @ San Diego State Aztecs,Total,Game Total,Over,57.5,Novig,+102,50.0,1.00,0.25,6.13,WIN,0.26
+2026-10-03 13:12:31,Cincinnati Bearcats @ Arizona Wildcats,Total,Game Total,Over,55.5,Novig,-104,51.1,0.26,0.07,1.71,LOSS,-0.07
+2026-10-03 13:12:31,San Jose State Spartans @ Hawaii Rainbow Warriors,Moneyline,San Jose State Spartans,ML,---,Novig,+135,42.6,0.03,0.00,0.12,WIN,0.00
+---,=== GAMELINE RUN: 2026-10-03 13:51:32 (11 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 13:51:33,Boston Bruins @ Minnesota Wild,Total,Game Total,Over,6.5,Novig,+111,47.4,0.02,0.00,0.10,LOSS,-0.00
+2026-10-03 13:51:33,St Louis Blues @ Colorado Avalanche,Total,Game Total,Over,6.5,Novig,+113,47.4,0.97,0.21,5.34,WIN,0.24
+2026-10-03 13:51:33,Boston College Eagles @ SMU Mustangs,Total,Game Total,Under,55.5,Novig,+102,50.0,1.00,0.25,6.13,WIN,0.26
+2026-10-03 13:51:33,Syracuse Orange @ UConn Huskies,Spread,Syracuse Orange,Spread,-6.5,Novig,-106,51.5,0.05,0.01,0.31,LOSS,-0.01
+2026-10-03 13:51:33,California Golden Bears @ UNLV Rebels,Moneyline,UNLV Rebels,ML,---,Novig,-113,53.1,0.14,0.04,0.98,WIN,0.04
+2026-10-03 13:51:33,California Golden Bears @ UNLV Rebels,Spread,California Golden Bears,Spread,2.5,theScore Bet,-105,51.6,0.75,0.20,4.94,LOSS,-0.20
+2026-10-03 13:51:33,Florida Gators @ Missouri Tigers,Spread,Missouri Tigers,Spread,5.5,Novig,+100,50.7,1.37,0.34,8.59,WIN,0.34
+2026-10-03 13:51:33,Louisville Cardinals @ NC State Wolfpack,Total,Game Total,Over,57.5,Novig,+100,50.2,0.45,0.11,2.78,WIN,0.11
+2026-10-03 13:51:33,Samford Bulldogs @ UAB Blazers,Spread,UAB Blazers,Spread,-30.5,Novig,-106,51.8,0.73,0.19,4.85,LOSS,-0.19
+2026-10-03 13:51:33,UTSA Roadrunners @ Rice Owls,Total,Game Total,Under,55.5,Novig,+100,50.8,1.55,0.39,9.67,WIN,0.39
+2026-10-03 13:51:33,Texas State Bobcats @ San Diego State Aztecs,Spread,Texas State Bobcats,Spread,-9.5,Novig,-104,51.1,0.33,0.08,2.11,LOSS,-0.08
+---,=== GAMELINE RUN: 2026-10-03 15:53:21 (19 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 15:53:21,Utah Mammoth @ Columbus Blue Jackets,Moneyline,Utah Mammoth,ML,---,Novig,-106,51.5,0.09,0.02,0.57,WIN,0.02
+2026-10-03 15:53:21,Washington Capitals @ Tampa Bay Lightning,Spread,Tampa Bay Lightning,Spread,-1.5,Novig,+150,40.1,0.29,0.05,1.20,WIN,0.08
+2026-10-03 15:53:21,Washington Capitals @ Tampa Bay Lightning,Total,Game Total,Under,6.5,Novig,-111,52.8,0.40,0.11,2.76,WIN,0.10
+2026-10-03 15:53:21,New Jersey Devils @ New York Islanders,Moneyline,New York Islanders,ML,---,Novig,+127,44.2,0.38,0.07,1.85,WIN,0.09
+2026-10-03 15:53:22,Navy Midshipmen @ Air Force Falcons,Moneyline,Navy Midshipmen,ML,---,Novig,+135,43.3,1.71,0.32,7.91,LOSS,-0.32
+2026-10-03 15:53:22,Middle Tennessee Blue Raiders @ Kansas Jayhawks,Total,Game Total,Over,50.5,Novig,-102,50.7,0.34,0.09,2.18,WIN,0.09
+2026-10-03 15:53:22,Stanford Cardinal @ Wake Forest Demon Deacons,Spread,Stanford Cardinal,Spread,14.5,Novig,+100,50.5,0.92,0.23,5.73,LOSS,-0.23
+2026-10-03 15:53:22,Alabama Crimson Tide @ Mississippi State Bulldogs,Total,Game Total,Under,62.5,Novig,+102,50.0,1.00,0.25,6.13,LOSS,-0.25
+2026-10-03 15:53:22,California Golden Bears @ UNLV Rebels,Spread,UNLV Rebels,Spread,-1.5,Novig,+102,49.8,0.54,0.13,3.29,WIN,0.13
+2026-10-03 15:53:22,Florida Gators @ Missouri Tigers,Moneyline,Missouri Tigers,ML,---,Novig,+194,34.1,0.25,0.03,0.81,WIN,0.06
+2026-10-03 15:53:22,Ohio State Buckeyes @ Iowa Hawkeyes,Spread,Ohio State Buckeyes,Spread,-14.5,Novig,+106,48.9,0.64,0.15,3.77,WIN,0.16
+2026-10-03 15:53:22,Samford Bulldogs @ UAB Blazers,Total,Game Total,Under,54.5,Novig,+100,50.2,0.43,0.11,2.71,WIN,0.11
+2026-10-03 15:53:22,Maryland Terrapins @ Nebraska Cornhuskers,Spread,Maryland Terrapins,Spread,14.5,Novig,+102,49.8,0.54,0.13,3.29,LOSS,-0.13
+2026-10-03 15:53:22,Purdue Boilermakers @ Illinois Fighting Illini,Total,Game Total,Under,61.5,Novig,+102,49.8,0.55,0.13,3.37,WIN,0.13
+2026-10-03 15:53:22,BYU Cougars @ TCU Horned Frogs,Moneyline,TCU Horned Frogs,ML,---,Novig,+199,33.7,0.86,0.11,2.69,LOSS,-0.11
+2026-10-03 15:53:22,Georgia Southern Eagles @ Coastal Carolina Chanticleers,Moneyline,Coastal Carolina Chanticleers,ML,---,Novig,+115,46.7,0.32,0.07,1.76,LOSS,-0.07
+2026-10-03 15:53:22,Fresno State Bulldogs @ Washington State Cougars,Total,Game Total,Under,44.5,Novig,+100,50.7,1.34,0.33,8.35,WIN,0.33
+2026-10-03 15:53:22,Baylor Bears @ Arizona State Sun Devils,Moneyline,Baylor Bears,ML,---,Novig,+160,39.3,2.16,0.34,8.46,WIN,0.54
+2026-10-03 15:53:22,Baylor Bears @ Arizona State Sun Devils,Total,Game Total,Under,48.5,Novig,+104,49.3,0.64,0.15,3.83,LOSS,-0.15
+---,=== GAMELINE RUN: 2026-10-03 17:20:25 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 17:20:26,Chicago Blackhawks @ Buffalo Sabres,Total,Game Total,Under,6.5,Novig,-104,51.3,0.53,0.14,3.47,LOSS,-0.14
+2026-10-03 17:20:26,Seattle Kraken @ Edmonton Oilers,Moneyline,Seattle Kraken,ML,---,Novig,+182,35.7,0.66,0.09,2.28,LOSS,-0.09
+2026-10-03 17:20:26,Washington Capitals @ Tampa Bay Lightning,Spread,Washington Capitals,Spread,1.5,BetMGM,-140,58.7,0.62,0.22,5.46,LOSS,-0.22
+2026-10-03 17:20:26,Dallas Stars @ Nashville Predators,Spread,Dallas Stars,Spread,-1.5,Novig,+199,33.9,1.29,0.16,4.04,LOSS,-0.16
+2026-10-03 17:20:26,Michigan Wolverines @ Minnesota Golden Gophers,Moneyline,Michigan Wolverines,ML,---,FanDuel,-136,64.8,12.38,4.21,105.24,LOSS,-4.21
+2026-10-03 17:20:26,West Virginia Mountaineers @ Iowa State Cyclones,Moneyline,Iowa State Cyclones,ML,---,FanDuel,-122,66.4,20.84,6.36,158.89,WIN,5.21
+2026-10-03 17:20:26,Auburn Tigers @ Tennessee Volunteers,Total,Game Total,Under,54.5,Novig,-106,51.9,0.83,0.22,5.52,WIN,0.21
+2026-10-03 17:20:26,Bowling Green Falcons @ Miami (OH) RedHawks,Total,Game Total,Under,41.5,Novig,-104,51.1,0.26,0.07,1.71,LOSS,-0.07
+2026-10-03 17:20:26,Virginia Cavaliers @ Florida State Seminoles,Total,Game Total,Under,51.5,Novig,+102,49.6,0.10,0.02,0.62,WIN,0.02
+2026-10-03 17:20:26,Texas Southern Tigers @ Florida Atlantic Owls,Total,Game Total,Under,62.5,Novig,+100,50.2,0.43,0.11,2.71,LOSS,-0.11
+2026-10-03 17:20:26,Texas State Bobcats @ San Diego State Aztecs,Spread,San Diego State Aztecs,Spread,9.5,Novig,+104,49.3,0.60,0.14,3.59,WIN,0.15
+2026-10-03 17:20:26,San Jose State Spartans @ Hawaii Rainbow Warriors,Moneyline,Hawaii Rainbow Warriors,ML,---,FanDuel,-137,58.2,0.67,0.23,5.75,LOSS,-0.23
+---,=== GAMELINE RUN: 2026-10-03 18:28:20 (17 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 18:28:21,Carolina Hurricanes @ Philadelphia Flyers,Moneyline,Carolina Hurricanes,ML,---,Novig,-122,55.0,0.09,0.03,0.68,WIN,0.02
+2026-10-03 18:28:21,Boston Bruins @ Minnesota Wild,Moneyline,Boston Bruins,ML,---,Novig,+190,34.5,0.16,0.02,0.52,LOSS,-0.02
+2026-10-03 18:28:21,Boston Bruins @ Minnesota Wild,Spread,Minnesota Wild,Spread,-1.5,Novig,+133,43.2,0.59,0.11,2.76,WIN,0.15
+2026-10-03 18:28:21,Los Angeles Kings @ San Jose Sharks,Moneyline,Los Angeles Kings,ML,---,Novig,+102,49.8,0.53,0.13,3.25,LOSS,-0.13
+2026-10-03 18:28:21,Michigan Wolverines @ Minnesota Golden Gophers,Moneyline,Minnesota Golden Gophers,ML,---,BetMGM,+200,36.0,8.09,1.01,25.29,WIN,2.02
+2026-10-03 18:28:21,Michigan Wolverines @ Minnesota Golden Gophers,Spread,Michigan Wolverines,Spread,-3.5,BetMGM,-105,51.3,0.16,0.04,1.04,LOSS,-0.04
+2026-10-03 18:28:21,Syracuse Orange @ UConn Huskies,Total,Game Total,Over,67.5,FanDuel,-110,54.1,3.32,0.91,22.84,WIN,0.83
+2026-10-03 18:28:21,Notre Dame Fighting Irish @ North Carolina Tar Heels,Spread,North Carolina Tar Heels,Spread,14.5,theScore Bet,+110,51.4,7.86,1.79,44.66,WIN,1.97
+2026-10-03 18:28:21,Florida Gators @ Missouri Tigers,Total,Game Total,Under,57.5,Novig,+104,49.3,0.64,0.15,3.83,LOSS,-0.15
+2026-10-03 18:28:21,Old Dominion Monarchs @ Georgia State Panthers,Total,Game Total,Under,51.5,Novig,+102,49.6,0.10,0.02,0.62,LOSS,-0.02
+2026-10-03 18:28:21,Kentucky Wildcats @ South Carolina Gamecocks,Spread,South Carolina Gamecocks,Spread,-2.5,Novig,+102,50.0,1.00,0.25,6.13,LOSS,-0.25
+2026-10-03 18:28:21,UL Monroe Warhawks @ South Alabama Jaguars,Spread,UL Monroe Warhawks,Spread,13.5,Novig,+106,48.9,0.64,0.15,3.77,LOSS,-0.15
+2026-10-03 18:28:21,Utah State Aggies @ Boise State Broncos,Total,Game Total,Under,51.5,Novig,-106,51.9,0.83,0.22,5.52,LOSS,-0.22
+2026-10-03 18:28:21,Miami Hurricanes @ Clemson Tigers,Spread,Miami Hurricanes,Spread,-15.5,Novig,-102,50.7,0.38,0.10,2.43,WIN,0.10
+2026-10-03 18:28:21,Temple Owls @ South Florida Bulls,Spread,Temple Owls,Spread,5.5,Novig,+104,49.8,1.53,0.37,9.21,WIN,0.38
+2026-10-03 18:28:21,Arkansas State Red Wolves @ Louisiana Ragin Cajuns,Total,Game Total,Over,49.5,Novig,+102,49.6,0.10,0.02,0.62,LOSS,-0.02
+2026-10-03 18:28:21,Fresno State Bulldogs @ Washington State Cougars,Spread,Fresno State Bulldogs,Spread,2.5,Novig,-102,50.7,0.38,0.10,2.43,WIN,0.10
+---,=== GAMELINE RUN: 2026-10-03 20:11:33 (5 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 20:11:34,Washington Capitals @ Tampa Bay Lightning,Total,Game Total,Over,6.5,Novig,+113,47.2,0.50,0.11,2.78,LOSS,-0.11
+2026-10-03 20:11:34,St Louis Blues @ Colorado Avalanche,Spread,Colorado Avalanche,Spread,-1.5,Novig,-102,51.7,2.40,0.61,15.32,WIN,0.60
+2026-10-03 20:11:34,Texas Southern Tigers @ Florida Atlantic Owls,Total,Game Total,Over,62.5,theScore Bet,+100,50.2,0.43,0.11,2.71,WIN,0.11
+2026-10-03 20:11:34,Georgia Southern Eagles @ Coastal Carolina Chanticleers,Moneyline,Georgia Southern Eagles,ML,---,Novig,-117,54.0,0.09,0.03,0.64,WIN,0.03
+2026-10-03 20:11:34,Fresno State Bulldogs @ Washington State Cougars,Moneyline,Washington State Cougars,ML,---,Novig,-115,53.5,0.11,0.03,0.81,LOSS,-0.03
+---,=== GAMELINE RUN: 2026-10-03 21:11:23 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 21:11:23,Seattle Kraken @ Edmonton Oilers,Spread,Edmonton Oilers,Spread,-1.5,Novig,+135,42.8,0.61,0.11,2.81,WIN,0.15
+2026-10-03 21:11:23,Calgary Flames @ Vancouver Canucks,Moneyline,Vancouver Canucks,ML,---,Novig,-104,51.2,0.36,0.09,2.33,WIN,0.09
+2026-10-03 21:11:24,Ohio Bobcats @ Kent State Golden Flashes,Spread,Ohio Bobcats,Spread,-7.5,DraftKings,+109,48.7,1.70,0.39,9.77,LOSS,-0.39
+2026-10-03 21:11:24,Bowling Green Falcons @ Miami (OH) RedHawks,Moneyline,Bowling Green Falcons,ML,---,Novig,+117,46.7,1.38,0.30,7.40,WIN,0.35
+2026-10-03 21:11:24,Louisville Cardinals @ NC State Wolfpack,Moneyline,Louisville Cardinals,ML,---,Novig,+130,45.4,4.44,0.85,21.34,LOSS,-0.85
+2026-10-03 21:11:24,Florida Gators @ Missouri Tigers,Moneyline,Florida Gators,ML,---,DraftKings,+173,43.2,17.91,2.59,64.72,LOSS,-2.59
+2026-10-03 21:11:24,Florida Gators @ Missouri Tigers,Total,Game Total,Under,58.5,BetMGM,-108,52.0,0.06,0.02,0.41,LOSS,-0.02
+2026-10-03 21:11:24,Purdue Boilermakers @ Illinois Fighting Illini,Moneyline,Illinois Fighting Illini,ML,---,FanDuel,-136,58.8,2.05,0.70,17.43,LOSS,-0.70
+2026-10-03 21:11:24,BYU Cougars @ TCU Horned Frogs,Spread,TCU Horned Frogs,Spread,5.5,theScore Bet,+100,50.2,0.46,0.11,2.86,LOSS,-0.11
+2026-10-03 21:11:24,Utah State Aggies @ Boise State Broncos,Spread,Utah State Aggies,Spread,19.5,Novig,-104,51.4,0.78,0.20,5.05,WIN,0.19
+2026-10-03 21:11:24,Miami Hurricanes @ Clemson Tigers,Spread,Clemson Tigers,Spread,14.5,Novig,+102,50.5,1.93,0.47,11.80,LOSS,-0.47
+2026-10-03 21:11:24,Washington Huskies @ USC Trojans,Spread,Washington Huskies,Spread,7.5,DraftKings,-105,51.4,0.31,0.08,2.01,WIN,0.08
+---,=== GAMELINE RUN: 2026-10-03 23:28:25 (10 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-03 23:28:25,Chicago Blackhawks @ Buffalo Sabres,Moneyline,Buffalo Sabres,ML,---,DraftKings,-125,66.6,19.92,6.22,155.62,WIN,4.98
+2026-10-03 23:28:25,Utah Mammoth @ Columbus Blue Jackets,Total,Game Total,Over,5.5,DraftKings,+124,45.5,1.88,0.38,9.46,LOSS,-0.38
+2026-10-03 23:28:25,Utah Mammoth @ Columbus Blue Jackets,Moneyline,Columbus Blue Jackets,ML,---,Novig,+102,49.8,0.56,0.14,3.45,LOSS,-0.14
+2026-10-03 23:28:25,Dallas Stars @ Nashville Predators,Moneyline,Nashville Predators,ML,---,Novig,+130,43.6,0.22,0.04,1.08,WIN,0.05
+2026-10-03 23:28:26,Maryland Terrapins @ Nebraska Cornhuskers,Spread,Maryland Terrapins,Spread,18.5,BetMGM,+170,44.6,20.32,2.99,74.72,LOSS,-2.99
+2026-10-03 23:28:26,Kentucky Wildcats @ South Carolina Gamecocks,Moneyline,South Carolina Gamecocks,ML,---,Novig,+111,47.4,0.02,0.01,0.13,LOSS,-0.01
+2026-10-03 23:28:26,Utah State Aggies @ Boise State Broncos,Spread,Boise State Broncos,Spread,-19.5,Novig,+104,49.5,1.07,0.26,6.40,LOSS,-0.26
+2026-10-03 23:28:26,Temple Owls @ South Florida Bulls,Total,Game Total,Over,50.5,Novig,+104,49.3,0.64,0.15,3.83,LOSS,-0.15
+2026-10-03 23:28:26,Texas Tech Red Raiders @ Colorado Buffaloes,Spread,Colorado Buffaloes,Spread,13.5,Novig,+104,49.5,1.07,0.26,6.40,LOSS,-0.26
+2026-10-03 23:28:26,Texas Tech Red Raiders @ Colorado Buffaloes,Total,Game Total,Under,50.5,Novig,+102,50.0,1.00,0.25,6.13,WIN,0.26
+---,=== GAMELINE RUN: 2026-10-04 00:36:08 (5 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-04 00:36:09,Chicago Blackhawks @ Buffalo Sabres,Moneyline,Chicago Blackhawks,ML,---,theScore Bet,+190,38.2,10.83,1.43,35.63,LOSS,-1.43
+2026-10-04 00:36:09,Carolina Hurricanes @ Philadelphia Flyers,Total,Game Total,Over,5.5,DraftKings,+100,50.2,0.43,0.11,2.71,LOSS,-0.11
+2026-10-04 00:36:09,Seattle Kraken @ Edmonton Oilers,Total,Game Total,Over,5.5,BetMGM,+115,46.6,0.14,0.03,0.78,LOSS,-0.03
+2026-10-04 00:36:09,Montréal Canadiens @ Pittsburgh Penguins,Total,Game Total,Over,7.5,DraftKings,+110,48.7,2.27,0.52,12.89,WIN,0.57
+2026-10-04 00:36:09,Montréal Canadiens @ Pittsburgh Penguins,Spread,Montréal Canadiens,Spread,2.5,BetMGM,-110,53.4,1.99,0.55,13.66,WIN,0.50
+---,=== GAMELINE RUN: 2026-10-04 02:59:08 (8 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-04 02:59:09,St Louis Blues @ Colorado Avalanche,Spread,Colorado Avalanche,Spread,-6.5,Novig,+120,45.9,0.97,0.20,5.03,LOSS,-0.20
+2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Moneyline,San Jose Sharks,ML,---,Novig,+199,33.8,1.03,0.13,3.25,WIN,0.26
+2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Spread,Los Angeles Kings,Spread,-1.5,Novig,+147,42.5,4.90,0.83,20.82,LOSS,-0.83
+2026-10-04 02:59:09,Los Angeles Kings @ San Jose Sharks,Total,Game Total,Under,5.5,Novig,-127,56.0,0.13,0.04,1.01,LOSS,-0.04
+2026-10-04 02:59:09,Calgary Flames @ Vancouver Canucks,Total,Game Total,Over,5.5,DraftKings,+120,49.6,9.05,1.88,47.12,LOSS,-1.88
+2026-10-04 02:59:09,Calgary Flames @ Vancouver Canucks,Spread,Vancouver Canucks,Spread,1.5,Novig,-135,57.9,0.82,0.28,6.92,WIN,0.21
+2026-10-04 02:59:10,Washington Huskies @ USC Trojans,Moneyline,Washington Huskies,ML,---,Novig,+182,42.4,19.64,2.70,67.43,LOSS,-2.70
+2026-10-04 02:59:10,San Jose State Spartans @ Hawaii Rainbow Warriors,Total,Game Total,Under,50.5,Novig,+104,49.6,1.09,0.26,6.56,WIN,0.27
+---,=== GAMELINE RUN: 2026-10-04 12:55:49 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-04 12:55:49,Golden State Warriors @ Los Angeles Clippers,Moneyline,Los Angeles Clippers,ML,---,DraftKings,+136,42.5,0.38,0.07,1.74,PENDING,0.00
+2026-10-04 12:55:50,Winnipeg Jets @ Detroit Red Wings,Moneyline,Detroit Red Wings,ML,---,Novig,+100,50.2,0.46,0.12,2.90,PENDING,0.00
+2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Moneyline,New York Rangers,ML,---,Novig,-120,55.0,0.84,0.25,6.30,PENDING,0.00
+2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Total,Game Total,Under,5.5,Novig,+108,48.5,0.92,0.21,5.33,PENDING,0.00
+2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Moneyline,Anaheim Ducks,ML,---,Novig,+125,44.6,0.36,0.07,1.80,PENDING,0.00
+2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11,PENDING,0.00
+2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Spread,Indianapolis Colts,Spread,-4.5,Novig,-104,51.4,0.81,0.21,5.28,PENDING,0.00
+2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Total,Game Total,Under,46.5,Novig,+104,49.5,1.07,0.26,6.40,PENDING,0.00
+2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Moneyline,San Francisco 49ers,ML,---,Novig,-135,57.6,0.23,0.08,1.96,PENDING,0.00
+2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Total,Game Total,Over,48.5,Novig,+104,49.8,1.53,0.37,9.21,PENDING,0.00
+2026-10-04 12:55:50,Kansas City Chiefs @ Las Vegas Raiders,Spread,Kansas City Chiefs,Spread,-4.5,Novig,-104,51.2,0.36,0.09,2.33,PENDING,0.00
+2026-10-04 12:55:50,Detroit Lions @ Carolina Panthers,Total,Game Total,Over,51.5,Novig,+100,50.7,1.37,0.34,8.59,PENDING,0.00
