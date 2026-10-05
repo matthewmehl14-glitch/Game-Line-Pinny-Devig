@@ -204,3 +204,6 @@ Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly U
 ---,=== GAMELINE RUN: 2026-10-05 18:57:19 (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
 2026-10-05 18:57:19,Ottawa Senators @ Boston Bruins,Total,Game Total,Under,5.5,Novig,+104,49.1,0.13,0.03,0.78
 2026-10-05 18:57:19,San Jose Sharks @ Dallas Stars,Moneyline,San Jose Sharks,ML,---,Novig,+182,35.6,0.31,0.04,1.08
+---,=== GAMELINE RUN: 2026-10-05 21:42:06 (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
+2026-10-05 21:42:07,New York Knicks @ Philadelphia 76ers,Moneyline,Philadelphia 76ers,ML,---,DraftKings,+145,41.5,1.58,0.27,6.80
+2026-10-05 21:42:07,New York Knicks @ Philadelphia 76ers,Spread,Philadelphia 76ers,Spread,3.5,DraftKings,+100,51.1,2.17,0.54,13.54
