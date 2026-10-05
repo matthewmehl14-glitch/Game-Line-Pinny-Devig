@@ -12,22 +12,22 @@ Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly U
 2026-10-03 13:12:30,Dallas Stars @ Nashville Predators,Moneyline,Dallas Stars,ML,---,Novig,-125,55.8,0.41,0.13,3.18,LOSS,-0.13
 2026-10-03 13:12:30,St Louis Blues @ Colorado Avalanche,Spread,St Louis Blues,Spread,1.5,BetMGM,-102,51.1,1.29,0.33,8.22,LOSS,-0.33
 2026-10-03 13:12:30,Calgary Flames @ Vancouver Canucks,Moneyline,Calgary Flames,ML,---,Novig,+104,49.2,0.35,0.08,2.12,LOSS,-0.08
-2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Moneyline,Washington Commanders,ML,---,FanDuel,+188,35.3,1.54,0.20,5.11,PENDING,0.00
-2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Total,Game Total,Over,47.5,Novig,+102,49.5,0.09,0.02,0.54,PENDING,0.00
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Spread,Arizona Cardinals,Spread,-2.5,FanDuel,-110,52.8,0.83,0.23,5.71,PENDING,0.00
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Moneyline,Arizona Cardinals,ML,---,Novig,-133,58.0,1.53,0.51,12.76,PENDING,0.00
-2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Total,Game Total,Over,44.5,Novig,+104,49.1,0.16,0.04,0.94,PENDING,0.00
-2026-10-03 13:12:30,Tennessee Titans @ Baltimore Ravens,Spread,Baltimore Ravens,Spread,-11.5,Novig,+100,50.5,0.92,0.23,5.73,PENDING,0.00
-2026-10-03 13:12:30,New York Jets @ Chicago Bears,Spread,Chicago Bears,Spread,-3.5,Novig,+100,50.3,0.68,0.17,4.26,PENDING,0.00
-2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Moneyline,Cincinnati Bengals,ML,---,DraftKings,-142,58.9,0.31,0.11,2.79,PENDING,0.00
-2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Spread,Cincinnati Bengals,Spread,-2.5,DraftKings,-115,53.7,0.33,0.10,2.40,PENDING,0.00
-2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Moneyline,Tampa Bay Buccaneers,ML,---,Novig,+163,38.0,0.02,0.00,0.08,PENDING,0.00
-2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Total,Game Total,Over,39.5,Novig,+104,49.2,0.40,0.10,2.40,PENDING,0.00
-2026-10-03 13:12:30,Los Angeles Rams @ Philadelphia Eagles,Spread,Los Angeles Rams,Spread,-3.5,Novig,+100,50.2,0.46,0.11,2.86,PENDING,0.00
-2026-10-03 13:12:30,Miami Dolphins @ Minnesota Vikings,Total,Game Total,Under,38.5,Novig,+104,50.2,2.46,0.59,14.79,PENDING,0.00
-2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Moneyline,Denver Broncos,ML,---,Novig,+133,43.0,0.17,0.03,0.78,PENDING,0.00
-2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Spread,Denver Broncos,Spread,2.5,Novig,+108,48.9,1.62,0.37,9.35,PENDING,0.00
-2026-10-03 13:12:30,Los Angeles Chargers @ Seattle Seahawks,Spread,Seattle Seahawks,Spread,-7.5,Novig,+111,47.6,0.48,0.11,2.71,PENDING,0.00
+2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Moneyline,Washington Commanders,ML,---,FanDuel,+188,35.3,1.54,0.20,5.11,LOSS,-0.20
+2026-10-03 13:12:30,Indianapolis Colts @ Washington Commanders,Total,Game Total,Over,47.5,Novig,+102,49.5,0.09,0.02,0.54,LOSS,-0.02
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Spread,Arizona Cardinals,Spread,-2.5,FanDuel,-110,52.8,0.83,0.23,5.71,LOSS,-0.23
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Moneyline,Arizona Cardinals,ML,---,Novig,-133,58.0,1.53,0.51,12.76,LOSS,-0.51
+2026-10-03 13:12:30,Arizona Cardinals @ New York Giants,Total,Game Total,Over,44.5,Novig,+104,49.1,0.16,0.04,0.94,WIN,0.04
+2026-10-03 13:12:30,Tennessee Titans @ Baltimore Ravens,Spread,Baltimore Ravens,Spread,-11.5,Novig,+100,50.5,0.92,0.23,5.73,LOSS,-0.23
+2026-10-03 13:12:30,New York Jets @ Chicago Bears,Spread,Chicago Bears,Spread,-3.5,Novig,+100,50.3,0.68,0.17,4.26,WIN,0.17
+2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Moneyline,Cincinnati Bengals,ML,---,DraftKings,-142,58.9,0.31,0.11,2.79,LOSS,-0.11
+2026-10-03 13:12:30,Jacksonville Jaguars @ Cincinnati Bengals,Spread,Cincinnati Bengals,Spread,-2.5,DraftKings,-115,53.7,0.33,0.10,2.40,LOSS,-0.10
+2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Moneyline,Tampa Bay Buccaneers,ML,---,Novig,+163,38.0,0.02,0.00,0.08,LOSS,-0.00
+2026-10-03 13:12:30,Green Bay Packers @ Tampa Bay Buccaneers,Total,Game Total,Over,39.5,Novig,+104,49.2,0.40,0.10,2.40,LOSS,-0.10
+2026-10-03 13:12:30,Los Angeles Rams @ Philadelphia Eagles,Spread,Los Angeles Rams,Spread,-3.5,Novig,+100,50.2,0.46,0.11,2.86,WIN,0.11
+2026-10-03 13:12:30,Miami Dolphins @ Minnesota Vikings,Total,Game Total,Under,38.5,Novig,+104,50.2,2.46,0.59,14.79,WIN,0.61
+2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Moneyline,Denver Broncos,ML,---,Novig,+133,43.0,0.17,0.03,0.78,LOSS,-0.03
+2026-10-03 13:12:30,Denver Broncos @ San Francisco 49ers,Spread,Denver Broncos,Spread,2.5,Novig,+108,48.9,1.62,0.37,9.35,LOSS,-0.37
+2026-10-03 13:12:30,Los Angeles Chargers @ Seattle Seahawks,Spread,Seattle Seahawks,Spread,-7.5,Novig,+111,47.6,0.48,0.11,2.71,LOSS,-0.11
 2026-10-03 13:12:30,Atlanta Falcons @ New Orleans Saints,Moneyline,Atlanta Falcons,ML,---,Novig,+120,45.5,0.19,0.04,1.00,PENDING,0.00
 2026-10-03 13:12:31,Navy Midshipmen @ Air Force Falcons,Total,Game Total,Over,45.5,Novig,-102,51.3,1.67,0.43,10.64,LOSS,-0.43
 2026-10-03 13:12:31,Alabama Crimson Tide @ Mississippi State Bulldogs,Moneyline,Mississippi State Bulldogs,ML,---,Novig,+194,34.6,1.70,0.22,5.47,LOSS,-0.22
@@ -182,15 +182,15 @@ Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly U
 2026-10-04 02:59:10,Washington Huskies @ USC Trojans,Moneyline,Washington Huskies,ML,---,Novig,+182,42.4,19.64,2.70,67.43,LOSS,-2.70
 2026-10-04 02:59:10,San Jose State Spartans @ Hawaii Rainbow Warriors,Total,Game Total,Under,50.5,Novig,+104,49.6,1.09,0.26,6.56,WIN,0.27
 ---,=== GAMELINE RUN: 2026-10-04 12:55:49 (12 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---
-2026-10-04 12:55:49,Golden State Warriors @ Los Angeles Clippers,Moneyline,Los Angeles Clippers,ML,---,DraftKings,+136,42.5,0.38,0.07,1.74,PENDING,0.00
-2026-10-04 12:55:50,Winnipeg Jets @ Detroit Red Wings,Moneyline,Detroit Red Wings,ML,---,Novig,+100,50.2,0.46,0.12,2.90,PENDING,0.00
-2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Moneyline,New York Rangers,ML,---,Novig,-120,55.0,0.84,0.25,6.30,PENDING,0.00
-2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Total,Game Total,Under,5.5,Novig,+108,48.5,0.92,0.21,5.33,PENDING,0.00
-2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Moneyline,Anaheim Ducks,ML,---,Novig,+125,44.6,0.36,0.07,1.80,PENDING,0.00
-2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11,PENDING,0.00
-2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Spread,Indianapolis Colts,Spread,-4.5,Novig,-104,51.4,0.81,0.21,5.28,PENDING,0.00
-2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Total,Game Total,Under,46.5,Novig,+104,49.5,1.07,0.26,6.40,PENDING,0.00
-2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Moneyline,San Francisco 49ers,ML,---,Novig,-135,57.6,0.23,0.08,1.96,PENDING,0.00
-2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Total,Game Total,Over,48.5,Novig,+104,49.8,1.53,0.37,9.21,PENDING,0.00
-2026-10-04 12:55:50,Kansas City Chiefs @ Las Vegas Raiders,Spread,Kansas City Chiefs,Spread,-4.5,Novig,-104,51.2,0.36,0.09,2.33,PENDING,0.00
-2026-10-04 12:55:50,Detroit Lions @ Carolina Panthers,Total,Game Total,Over,51.5,Novig,+100,50.7,1.37,0.34,8.59,PENDING,0.00
+2026-10-04 12:55:49,Golden State Warriors @ Los Angeles Clippers,Moneyline,Los Angeles Clippers,ML,---,DraftKings,+136,42.5,0.38,0.07,1.74,WIN,0.10
+2026-10-04 12:55:50,Winnipeg Jets @ Detroit Red Wings,Moneyline,Detroit Red Wings,ML,---,Novig,+100,50.2,0.46,0.12,2.90,LOSS,-0.12
+2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Moneyline,New York Rangers,ML,---,Novig,-120,55.0,0.84,0.25,6.30,WIN,0.21
+2026-10-04 12:55:50,Utah Mammoth @ New York Rangers,Total,Game Total,Under,5.5,Novig,+108,48.5,0.92,0.21,5.33,LOSS,-0.21
+2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Moneyline,Anaheim Ducks,ML,---,Novig,+125,44.6,0.36,0.07,1.80,WIN,0.09
+2026-10-04 12:55:50,Florida Panthers @ Anaheim Ducks,Total,Game Total,Over,6.5,Novig,-104,51.1,0.33,0.08,2.11,LOSS,-0.08
+2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Spread,Indianapolis Colts,Spread,-4.5,Novig,-104,51.4,0.81,0.21,5.28,WIN,0.20
+2026-10-04 12:55:50,Indianapolis Colts @ Washington Commanders,Total,Game Total,Under,46.5,Novig,+104,49.5,1.07,0.26,6.40,WIN,0.27
+2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Moneyline,San Francisco 49ers,ML,---,Novig,-135,57.6,0.23,0.08,1.96,WIN,0.06
+2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Total,Game Total,Over,48.5,Novig,+104,49.8,1.53,0.37,9.21,LOSS,-0.37
+2026-10-04 12:55:50,Kansas City Chiefs @ Las Vegas Raiders,Spread,Kansas City Chiefs,Spread,-4.5,Novig,-104,51.2,0.36,0.09,2.33,LOSS,-0.09
+2026-10-04 12:55:50,Detroit Lions @ Carolina Panthers,Total,Game Total,Over,51.5,Novig,+100,50.7,1.37,0.34,8.59,WIN,0.34
