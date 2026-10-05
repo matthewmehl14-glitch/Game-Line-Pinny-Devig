@@ -153,8 +153,15 @@ def fetch_and_scan():
             
             try:
                 commence_time = datetime.strptime(event['commence_time'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
+                
+                # Check 1: Ensure the game is scheduled for today (Central Time)
                 if not (start_local.astimezone(timezone.utc) <= commence_time <= end_local.astimezone(timezone.utc)):
                     continue
+                    
+                # Check 2: STRICT PREGAME FILTER - Skip if the game has already started
+                if commence_time <= datetime.now(timezone.utc):
+                    continue
+                    
             except Exception:
                 continue
                 
@@ -253,7 +260,7 @@ def fetch_and_scan():
         log_batch_to_csv(new_plays_to_log, run_timestamp)
         send_discord_digest(new_plays_to_log, run_timestamp)
 
-    print(f"Scan complete. Found {edges_found} active game line edges ({len(new_plays_to_log)} new plays logged & alerted).")
+    print(f"Scan complete. Found {edges_found} active pregame game line edges ({len(new_plays_to_log)} new plays logged & alerted).")
 
 if __name__ == "__main__":
     fetch_and_scan()
