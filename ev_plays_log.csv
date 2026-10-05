@@ -201,3 +201,6 @@ Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly U
 2026-10-05 15:16:53,Winnipeg Jets @ Pittsburgh Penguins,Total,Game Total,Under,6.5,Novig,-102,50.7,0.38,0.10,2.43
 2026-10-05 15:16:53,San Jose Sharks @ Dallas Stars,Spread,Dallas Stars,Spread,-1.5,Novig,+141,41.6,0.35,0.06,1.53
 2026-10-05 15:16:53,San Jose Sharks @ Dallas Stars,Total,Game Total,Under,6.5,Novig,-108,52.1,0.26,0.07,1.74
+---,=== GAMELINE RUN: 2026-10-05 18:57:19 (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
+2026-10-05 18:57:19,Ottawa Senators @ Boston Bruins,Total,Game Total,Under,5.5,Novig,+104,49.1,0.13,0.03,0.78
+2026-10-05 18:57:19,San Jose Sharks @ Dallas Stars,Moneyline,San Jose Sharks,ML,---,Novig,+182,35.6,0.31,0.04,1.08
