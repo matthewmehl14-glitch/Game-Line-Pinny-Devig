@@ -194,3 +194,10 @@ Timestamp,Game,Market,Player,Side,Line,Bookmaker,Odds,True Prob %,Edge %,Kelly U
 2026-10-04 12:55:50,Denver Broncos @ San Francisco 49ers,Total,Game Total,Over,48.5,Novig,+104,49.8,1.53,0.37,9.21,LOSS,-0.37
 2026-10-04 12:55:50,Kansas City Chiefs @ Las Vegas Raiders,Spread,Kansas City Chiefs,Spread,-4.5,Novig,-104,51.2,0.36,0.09,2.33,LOSS,-0.09
 2026-10-04 12:55:50,Detroit Lions @ Carolina Panthers,Total,Game Total,Over,51.5,Novig,+100,50.7,1.37,0.34,8.59,WIN,0.34
+---,=== GAMELINE RUN: 2026-10-05 15:16:52 (6 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---
+2026-10-05 15:16:53,Los Angeles Lakers @ Sacramento Kings,Moneyline,Sacramento Kings,ML,---,DraftKings,+195,34.5,1.77,0.23,5.68
+2026-10-05 15:16:53,Philadelphia Flyers @ Tampa Bay Lightning,Moneyline,Philadelphia Flyers,ML,---,Novig,+199,33.5,0.03,0.00,0.09
+2026-10-05 15:16:53,Winnipeg Jets @ Pittsburgh Penguins,Spread,Pittsburgh Penguins,Spread,-1.5,Novig,+150,40.3,0.68,0.11,2.84
+2026-10-05 15:16:53,Winnipeg Jets @ Pittsburgh Penguins,Total,Game Total,Under,6.5,Novig,-102,50.7,0.38,0.10,2.43
+2026-10-05 15:16:53,San Jose Sharks @ Dallas Stars,Spread,Dallas Stars,Spread,-1.5,Novig,+141,41.6,0.35,0.06,1.53
+2026-10-05 15:16:53,San Jose Sharks @ Dallas Stars,Total,Game Total,Under,6.5,Novig,-108,52.1,0.26,0.07,1.74
