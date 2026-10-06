@@ -8,9 +8,10 @@ Changes from v1:
     MAX_PINNY_LAG_MIN minutes after Pinnacle did
   * NHL puck lines other than +/-1.5 are rejected (those are live lines)
   * MIN_EDGE_PCT floor and MAX_EDGE_PCT "suspect" ceiling
-  * One play per (event, market): best price across books, and never the
-    opposite side of a market already logged
+  * One play per game "side" (moneyline OR spread, never both) plus one total:
+    best edge across books, and never the opposite side of anything already logged
   * Stores Sport + Event ID so the grader matches by ID, not by name
+  * SPORT_MIN_EDGE: per-sport edge floors or 'off'
   * CLV: every run refreshes 'Close Prob %' / 'CLV %' on pending plays from the
     latest pregame Pinnacle no-vig price, so the last pregame run = closing line
 """
@@ -23,7 +24,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 from ev_common import (
-    CT, ESPN_LEAGUES, FIELDNAMES, SPORTS_CONFIG, UNIT_SIZE,
+    CT, ESPN_LEAGUES, FIELDNAMES, MARKET_GROUP, SPORTS_CONFIG, UNIT_SIZE,
     american_to_decimal, american_to_prob, is_separator, make_separator,
     now_ct, parse_iso, parse_odds, read_log, write_log,
 )
@@ -42,6 +43,24 @@ MAX_ODDS = int(os.environ.get("MAX_ODDS", "200"))
 KELLY_FRACTION = float(os.environ.get("KELLY_FRACTION", "0.25"))
 # 1 = skip any game ESPN can't find. 0 = allow it (commence_time still enforced).
 REQUIRE_ESPN_PREGAME = os.environ.get("REQUIRE_ESPN_PREGAME", "0") == "1"
+
+
+def parse_sport_min_edge(raw):
+    """'americanfootball_ncaaf=2.5,icehockey_nhl_preseason=off' -> {sport: float|None}"""
+    out = {}
+    for part in (raw or "").split(","):
+        if "=" not in part:
+            continue
+        key, val = (x.strip() for x in part.split("=", 1))
+        if key not in SPORTS_CONFIG:
+            print(f"WARNING: SPORT_MIN_EDGE has unknown sport '{key}', ignored")
+            continue
+        out[key] = None if val.lower() == "off" else float(val)
+    return out
+
+
+# Per-sport overrides of MIN_EDGE_PCT; 'off' stops scanning that sport (saves credits).
+SPORT_MIN_EDGE = parse_sport_min_edge(os.environ.get("SPORT_MIN_EDGE", ""))
 
 MARKET_DISPLAY = {"h2h": "Moneyline", "spreads": "Spread", "totals": "Total"}
 DISPLAY_TO_KEY = {v: k for k, v in MARKET_DISPLAY.items()}
@@ -167,8 +186,9 @@ def outcome_key_for_row(row):
     return None, None
 
 
-def update_clv(rows, fair):
+def update_clv(rows, fair, run_ct):
     updated = 0
+    seen_stamp = run_ct.strftime("%Y-%m-%d %H:%M")
     for row in rows:
         m_key, key = outcome_key_for_row(row)
         if not m_key:
@@ -178,9 +198,8 @@ def update_clv(rows, fair):
             continue  # Pinnacle moved off this number; keep last known value
         clv = (prob * american_to_decimal(parse_odds(row["Odds"])) - 1) * 100
         new_close, new_clv = f"{prob * 100:.1f}", f"{clv:.2f}"
-        if (row["Close Prob %"], row["CLV %"]) != (new_close, new_clv):
-            row["Close Prob %"], row["CLV %"] = new_close, new_clv
-            updated += 1
+        row["Close Prob %"], row["CLV %"], row["Close Seen CT"] = new_close, new_clv, seen_stamp
+        updated += 1
     return updated
 
 
@@ -218,6 +237,7 @@ def build_play(sport_key, event, m_key, cand, run_ct, commence):
         "Bet Amount": f"{units * UNIT_SIZE:.2f}",
         "Close Prob %": f"{p * 100:.1f}",
         "CLV %": f"{cand['edge'] * 100:.2f}",
+        "Close Seen CT": run_ct.strftime("%Y-%m-%d %H:%M"),
         "Result": "PENDING",
         "Net Units": "0.00",
     })
@@ -271,8 +291,8 @@ def fetch_and_scan():
 
     rows = read_log()
 
-    # Dedup: one play per (event, market). Legacy rows (no Event ID) fall back
-    # to (game, market) if logged in the last 2 days.
+    # Dedup: one play per (event, group), where ML + spread share the "side"
+    # group. Legacy rows (no Event ID) fall back to (game, group) for 2 days.
     seen = set()
     legacy_seen = set()
     pending_by_event = defaultdict(list)
@@ -281,7 +301,7 @@ def fetch_and_scan():
         if is_separator(r):
             continue
         if r["Event ID"]:
-            seen.add((r["Event ID"], r["Market"].lower()))
+            seen.add((r["Event ID"], MARKET_GROUP.get(r["Market"], r["Market"].lower())))
             if r["Result"] == "PENDING":
                 pending_by_event[r["Event ID"]].append(r)
         else:
@@ -290,13 +310,18 @@ def fetch_and_scan():
             except ValueError:
                 ts = legacy_cutoff
             if ts >= legacy_cutoff:
-                legacy_seen.add((r["Game"].strip().lower(), r["Market"].strip().lower()))
+                legacy_seen.add((r["Game"].strip().lower(),
+                                 MARKET_GROUP.get(r["Market"].strip(), r["Market"].strip().lower())))
 
     new_plays = []
     clv_updates = 0
     counts = defaultdict(int)
 
     for sport_key, markets in SPORTS_CONFIG.items():
+        min_edge = SPORT_MIN_EDGE.get(sport_key, MIN_EDGE_PCT)
+        if min_edge is None:
+            print(f"\n{sport_key}: disabled via SPORT_MIN_EDGE")
+            continue
         params = {
             "apiKey": API_KEY,
             "bookmakers": f"pinnacle,{KS_BOOKS}",
@@ -314,7 +339,7 @@ def fetch_and_scan():
             continue
         remaining = res.headers.get("x-requests-remaining")
         events = res.json()
-        print(f"\n{sport_key}: {len(events)} events (credits left: {remaining})")
+        print(f"\n{sport_key}: {len(events)} events, min edge {min_edge}% (credits left: {remaining})")
 
         for event in events:
             try:
@@ -343,7 +368,7 @@ def fetch_and_scan():
                 continue
 
             # Refresh closing-line value for plays already logged on this game
-            clv_updates += update_clv(pending_by_event.get(event["id"], []), fair)
+            clv_updates += update_clv(pending_by_event.get(event["id"], []), fair, run_ct)
 
             best = {}
             for book in event.get("bookmakers", []):
@@ -373,24 +398,24 @@ def fetch_and_scan():
                             continue
                         edge = true_prob * american_to_decimal(price) - 1
                         edge_pct = edge * 100
-                        if edge_pct < MIN_EDGE_PCT:
+                        if edge_pct < min_edge:
                             continue
                         if edge_pct > MAX_EDGE_PCT:
                             print(f"  SUSPECT {game} {name} {pt} {price} @ {book['title']}: "
                                   f"{edge_pct:.1f}% edge, not logged")
                             counts["suspect"] += 1
                             continue
-                        if m_key not in best or edge > best[m_key]["edge"]:
-                            best[m_key] = {"name": name, "point": pt, "odds": price,
-                                           "book": book["title"], "true_prob": true_prob,
-                                           "edge": edge}
+                        group = MARKET_GROUP[MARKET_DISPLAY[m_key]]
+                        if group not in best or edge > best[group]["edge"]:
+                            best[group] = {"m_key": m_key, "name": name, "point": pt,
+                                           "odds": price, "book": book["title"],
+                                           "true_prob": true_prob, "edge": edge}
 
-            for m_key, cand in best.items():
-                display = MARKET_DISPLAY[m_key].lower()
-                if (event["id"], display) in seen or (game.lower(), display) in legacy_seen:
+            for group, cand in best.items():
+                if (event["id"], group) in seen or (game.lower(), group) in legacy_seen:
                     continue
-                play = build_play(sport_key, event, m_key, cand, run_ct, commence)
-                seen.add((event["id"], display))
+                play = build_play(sport_key, event, cand["m_key"], cand, run_ct, commence)
+                seen.add((event["id"], group))
                 new_plays.append(play)
                 print(f"  + {play['Edge %']}% {play['Player']} {play['Side']} {play['Line']} "
                       f"{play['Odds']} @ {play['Bookmaker']}")
