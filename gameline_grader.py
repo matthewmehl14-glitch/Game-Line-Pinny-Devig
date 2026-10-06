@@ -20,7 +20,8 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 from ev_common import (
-    BUCKET_LABELS, SPORTS_CONFIG, UNIT_SIZE, american_to_decimal, edge_bucket,
+    BUCKET_LABELS, CLOSE_WINDOW_MIN, SPORTS_CONFIG, UNIT_SIZE, american_to_decimal,
+    closing_clv, edge_bucket,
     is_separator, parse_iso, parse_odds, read_log, write_log,
 )
 
@@ -127,12 +128,10 @@ def add_to_stats(stats, row):
         b[row["Result"][0]] += 1
         b["units"] += float(row["Net Units"] or 0)
         b["risked"] += float(row["Kelly Units"] or 0)
-    if row["CLV %"]:
-        try:
-            b["clv"] += float(row["CLV %"])
-            b["clv_n"] += 1
-        except ValueError:
-            pass
+    clv = closing_clv(row)
+    if clv is not None:
+        b["clv"] += clv
+        b["clv_n"] += 1
 
 
 def build_digest(batch, lifetime, graded_count, excluded):
@@ -150,7 +149,7 @@ def build_digest(batch, lifetime, graded_count, excluded):
         lines.append(f"**Batch:** {bt['W']}-{bt['L']}-{bt['P']} | {bt['units']:+.2f}u")
         lines.append(f"**Lifetime:** {lt['W']}-{lt['L']}-{lt['P']} ({pct:.1f}%) | "
                      f"{lt['units']:+.2f}u | ROI {roi:+.1f}%")
-        lines.append(f"**Avg CLV:** {clv}\n")
+        lines.append(f"**Avg CLV (≤{CLOSE_WINDOW_MIN:g}m pre-start):** {clv}\n")
     lines.append(f"💰 **Batch Profit:** {batch_total:+.2f}u (${batch_total * UNIT_SIZE:+.2f})")
     lines.append(f"🏦 **Lifetime Profit:** {life_total:+.2f}u (${life_total * UNIT_SIZE:+.2f})")
     if excluded:
