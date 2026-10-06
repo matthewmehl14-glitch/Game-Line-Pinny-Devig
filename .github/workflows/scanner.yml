@@ -36,6 +36,8 @@ jobs:
           KELLY_FRACTION: '0.25'
           UNIT_SIZE: '25'
           REQUIRE_ESPN_PREGAME: '0'
+          # Per-sport edge floors or off, e.g. 'americanfootball_ncaaf=2.0,icehockey_nhl_preseason=off'
+          SPORT_MIN_EDGE: ''
         run: python gameline_scanner.py
 
       - name: Commit and push changes
