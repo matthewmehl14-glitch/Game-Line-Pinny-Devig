@@ -1,266 +1,411 @@
+"""
+EV Game Line Scanner - Pinnacle no-vig baseline vs Kansas books.
+
+Changes from v1:
+  * America/Chicago timezone (DST-safe) for the slate window and all timestamps
+  * ESPN status check: any game ESPN reports as 'in' or 'post' is skipped
+  * Stale-Pinnacle guard: skip a market when the soft book updated more than
+    MAX_PINNY_LAG_MIN minutes after Pinnacle did
+  * NHL puck lines other than +/-1.5 are rejected (those are live lines)
+  * MIN_EDGE_PCT floor and MAX_EDGE_PCT "suspect" ceiling
+  * One play per (event, market): best price across books, and never the
+    opposite side of a market already logged
+  * Stores Sport + Event ID so the grader matches by ID, not by name
+  * CLV: every run refreshes 'Close Prob %' / 'CLV %' on pending plays from the
+    latest pregame Pinnacle no-vig price, so the last pregame run = closing line
+"""
 import os
-import csv
-import requests
+import re
+import unicodedata
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
-API_KEY = os.environ.get('ODDS_API_KEY')
-DISCORD_WEBHOOK_URL = os.environ.get('DISCORD_WEBHOOK_URL')
-UNIT_SIZE = 25.00
+import requests
 
-# Approved Kansas books to bet on
-KS_BOOKS = 'fanduel,draftkings,betmgm,caesars,espnbet,novig'
-ALLOWED_BOOKS = set(KS_BOOKS.split(','))
-CSV_FILENAME = 'ev_plays_log.csv'
+from ev_common import (
+    CT, ESPN_LEAGUES, FIELDNAMES, SPORTS_CONFIG, UNIT_SIZE,
+    american_to_decimal, american_to_prob, is_separator, make_separator,
+    now_ct, parse_iso, parse_odds, read_log, write_log,
+)
 
-# Game Line Markets
-SPORTS_CONFIG = {
-    'basketball_wnba': 'h2h,spreads,totals',
-    'basketball_nba': 'h2h,spreads,totals',
-    'basketball_nba_preseason': 'h2h,spreads,totals',
-    'icehockey_nhl': 'h2h,spreads,totals',
-    'icehockey_nhl_preseason': 'h2h,spreads,totals',
-    'americanfootball_nfl': 'h2h,spreads,totals',
-    'americanfootball_ncaaf': 'h2h,spreads,totals'
-}
+API_KEY = os.environ.get("ODDS_API_KEY")
+DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
-def american_to_prob(odds):
-    if odds < 0: return abs(odds) / (abs(odds) + 100)
-    return 100 / (odds + 100)
+KS_BOOKS = "fanduel,draftkings,betmgm,caesars,espnbet,novig"
+ALLOWED_BOOKS = set(KS_BOOKS.split(","))
 
-def american_to_decimal(odds):
-    if odds > 0: return (odds / 100) + 1
-    return (100 / abs(odds)) + 1
+MIN_EDGE_PCT = float(os.environ.get("MIN_EDGE_PCT", "1.0"))
+MAX_EDGE_PCT = float(os.environ.get("MAX_EDGE_PCT", "15.0"))
+MAX_PINNY_LAG_MIN = float(os.environ.get("MAX_PINNY_LAG_MIN", "10"))
+MIN_ODDS = int(os.environ.get("MIN_ODDS", "-150"))
+MAX_ODDS = int(os.environ.get("MAX_ODDS", "200"))
+KELLY_FRACTION = float(os.environ.get("KELLY_FRACTION", "0.25"))
+# 1 = skip any game ESPN can't find. 0 = allow it (commence_time still enforced).
+REQUIRE_ESPN_PREGAME = os.environ.get("REQUIRE_ESPN_PREGAME", "0") == "1"
 
-def load_seen_plays():
-    seen = set()
-    if not os.path.isfile(CSV_FILENAME): return seen
-    with open(CSV_FILENAME, mode='r', newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            player = row.get('Player', '')
-            game = row.get('Game', '')
-            if not player or player.startswith('---') or game.startswith('==='):
-                continue
-                
-            key = (
-                game.strip().lower(),
-                row.get('Market', '').strip().lower(),
-                player.strip().lower(),
-                row.get('Side', '').strip().lower(),
-                str(row.get('Line', '')).strip()
-            )
-            seen.add(key)
-    return seen
+MARKET_DISPLAY = {"h2h": "Moneyline", "spreads": "Spread", "totals": "Total"}
+DISPLAY_TO_KEY = {v: k for k, v in MARKET_DISPLAY.items()}
 
-def log_batch_to_csv(new_plays, run_timestamp):
-    file_exists = os.path.isfile(CSV_FILENAME)
-    is_empty = not file_exists or os.path.getsize(CSV_FILENAME) == 0
 
-    with open(CSV_FILENAME, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        
-        if is_empty:
-            writer.writerow(['Timestamp', 'Game', 'Market', 'Player', 'Side', 'Line', 'Bookmaker', 'Odds', 'True Prob %', 'Edge %', 'Kelly Units', 'Bet Amount'])
+# ---------- ESPN pregame check ----------
+IGNORE_TOKENS = {"new", "york", "los", "angeles", "las", "vegas", "san", "bay",
+                 "city", "state", "university", "st", "the"}
+
+
+def normalize_name(name):
+    if not name:
+        return ""
+    name = unicodedata.normalize("NFKD", str(name)).encode("ASCII", "ignore").decode("utf-8")
+    name = name.lower()
+    name = re.sub(r"\b(jr|sr|ii|iii|iv)\b\.?", "", name)
+    name = re.sub(r"[^a-z\s]", "", name)
+    return " ".join(name.split())
+
+
+def teams_match(a, b):
+    na, nb = normalize_name(a), normalize_name(b)
+    if not na or not nb:
+        return False
+    if na == nb or na in nb or nb in na:
+        return True
+    return bool((set(na.split()) - IGNORE_TOKENS) & (set(nb.split()) - IGNORE_TOKENS))
+
+
+_espn_cache = {}
+
+
+def espn_slate(sport_key, date_ct):
+    league = ESPN_LEAGUES.get(sport_key)
+    if not league:
+        return None
+    cache_key = (league, date_ct)
+    if cache_key in _espn_cache:
+        return _espn_cache[cache_key]
+
+    sport, lg = league
+    params = {"dates": date_ct.strftime("%Y%m%d"), "limit": 500}
+    if lg == "college-football":
+        params["groups"] = "80"  # all FBS, not just featured games
+    url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{lg}/scoreboard"
+
+    slate = None
+    try:
+        res = requests.get(url, params=params, timeout=10)
+        if res.status_code == 200:
+            slate = []
+            for ev in res.json().get("events", []):
+                try:
+                    comps = ev["competitions"][0]["competitors"]
+                    home = next(c for c in comps if c["homeAway"] == "home")["team"]["displayName"]
+                    away = next(c for c in comps if c["homeAway"] == "away")["team"]["displayName"]
+                    slate.append({
+                        "home": home, "away": away,
+                        "start": parse_iso(ev["date"]),
+                        "state": ev["status"]["type"]["state"],
+                    })
+                except (KeyError, StopIteration, ValueError, TypeError):
+                    continue
         else:
-            writer.writerow([
-                '---',
-                f'=== GAMELINE RUN: {run_timestamp} ({len(new_plays)} PLAYS FOUND) ===',
-                '---', '---', '---', '---', '---', '---', '---', '---', '---', '---'
-            ])
+            print(f"  ESPN {lg} returned {res.status_code}; pregame check unavailable")
+    except requests.RequestException as e:
+        print(f"  ESPN {lg} error: {e}; pregame check unavailable")
 
-        for play in new_plays:
-            writer.writerow([
-                play['timestamp'], play['game'], play['market'], 
-                play['player'], play['side'], play['line'], 
-                play['book'], play['odds'], play['true_prob'], 
-                play['edge'], play['units'], play['wager']
-            ])
+    _espn_cache[cache_key] = slate
+    return slate
 
-def send_discord_digest(new_plays, run_timestamp):
+
+def espn_state(slate, away, home, commence):
+    """'pre' / 'in' / 'post', or None if ESPN has no matching game."""
+    if not slate:
+        return None
+    for g in slate:
+        if abs((g["start"] - commence).total_seconds()) > 6 * 3600:
+            continue
+        if teams_match(away, g["away"]) and teams_match(home, g["home"]):
+            return g["state"]
+    return None
+
+
+# ---------- Pinnacle ----------
+def pinnacle_fair(event):
+    """m_key -> {'probs': {(name, point): no-vig prob}, 'last_update': datetime|None}"""
+    fair = {}
+    for book in event.get("bookmakers", []):
+        if book.get("key") != "pinnacle":
+            continue
+        for market in book.get("markets", []):
+            outs = market.get("outcomes", [])
+            if len(outs) != 2:
+                continue
+            p1 = american_to_prob(outs[0]["price"])
+            p2 = american_to_prob(outs[1]["price"])
+            total = p1 + p2
+            lu = market.get("last_update") or book.get("last_update")
+            fair[market["key"]] = {
+                "probs": {
+                    (outs[0]["name"], outs[0].get("point")): p1 / total,
+                    (outs[1]["name"], outs[1].get("point")): p2 / total,
+                },
+                "last_update": parse_iso(lu) if lu else None,
+            }
+    return fair
+
+
+def outcome_key_for_row(row):
+    """Map a logged row back to (market key, (outcome name, point))."""
+    m_key = DISPLAY_TO_KEY.get(row["Market"])
+    if m_key == "h2h":
+        return m_key, (row["Player"], None)
+    try:
+        line = float(row["Line"])
+    except ValueError:
+        return None, None
+    if m_key == "spreads":
+        return m_key, (row["Player"], line)
+    if m_key == "totals":
+        return m_key, (row["Side"], line)
+    return None, None
+
+
+def update_clv(rows, fair):
+    updated = 0
+    for row in rows:
+        m_key, key = outcome_key_for_row(row)
+        if not m_key:
+            continue
+        prob = fair.get(m_key, {}).get("probs", {}).get(key)
+        if prob is None:
+            continue  # Pinnacle moved off this number; keep last known value
+        clv = (prob * american_to_decimal(parse_odds(row["Odds"])) - 1) * 100
+        new_close, new_clv = f"{prob * 100:.1f}", f"{clv:.2f}"
+        if (row["Close Prob %"], row["CLV %"]) != (new_close, new_clv):
+            row["Close Prob %"], row["CLV %"] = new_close, new_clv
+            updated += 1
+    return updated
+
+
+# ---------- play building ----------
+def build_play(sport_key, event, m_key, cand, run_ct, commence):
+    if m_key == "h2h":
+        player, side, line = cand["name"], "ML", "---"
+    elif m_key == "spreads":
+        player, side, line = cand["name"], "Spread", str(cand["point"])
+    else:
+        player, side, line = "Game Total", cand["name"], str(cand["point"])
+
+    p = cand["true_prob"]
+    b = american_to_decimal(cand["odds"]) - 1
+    kelly = (p * b - (1 - p)) / b
+    units = kelly * 100 * KELLY_FRACTION
+    odds = cand["odds"]
+
+    row = {f: "" for f in FIELDNAMES}
+    row.update({
+        "Timestamp": run_ct.strftime("%Y-%m-%d %H:%M:%S"),
+        "Sport": sport_key,
+        "Event ID": event["id"],
+        "Commence CT": commence.astimezone(CT).strftime("%Y-%m-%d %H:%M"),
+        "Game": f"{event['away_team']} @ {event['home_team']}",
+        "Market": MARKET_DISPLAY[m_key],
+        "Player": player,
+        "Side": side,
+        "Line": line,
+        "Bookmaker": cand["book"],
+        "Odds": f"+{odds}" if odds > 0 else str(odds),
+        "True Prob %": f"{p * 100:.1f}",
+        "Edge %": f"{cand['edge'] * 100:.2f}",
+        "Kelly Units": f"{units:.2f}",
+        "Bet Amount": f"{units * UNIT_SIZE:.2f}",
+        "Close Prob %": f"{p * 100:.1f}",
+        "CLV %": f"{cand['edge'] * 100:.2f}",
+        "Result": "PENDING",
+        "Net Units": "0.00",
+    })
+    return row
+
+
+# ---------- Discord ----------
+def send_discord_digest(new_plays, run_label):
     if not DISCORD_WEBHOOK_URL or not new_plays:
         return
-
-    sorted_plays = sorted(new_plays, key=lambda x: float(x['edge']), reverse=True)
-
+    plays = sorted(new_plays, key=lambda r: float(r["Edge %"]), reverse=True)
     chunk_size = 15
-    for chunk_idx in range(0, len(sorted_plays), chunk_size):
-        chunk = sorted_plays[chunk_idx:chunk_idx + chunk_size]
-        
+    total_chunks = (len(plays) + chunk_size - 1) // chunk_size
+
+    for idx in range(0, len(plays), chunk_size):
         lines = []
-        for play in chunk:
-            edge_val = float(play['edge'])
-            icon = "🔥" if edge_val >= 5.0 else ("💎" if edge_val >= 2.0 else "▫️")
-            
-            line_1 = f"{icon} **+{play['edge']}%** | **{play['player']}** {play['side']} {play['line']}"
-            line_2 = f"↳ **{play['odds']}** @ {play['book']} • **{play['units']}u** (${play['wager']}) • *{play['game']}*"
-            lines.append(f"{line_1}\n{line_2}")
-
-        total_chunks = (len(sorted_plays) + chunk_size - 1) // chunk_size
-        part_tag = f" (Part {chunk_idx // chunk_size + 1}/{total_chunks})" if total_chunks > 1 else ""
-
+        for r in plays[idx:idx + chunk_size]:
+            edge = float(r["Edge %"])
+            icon = "🔥" if edge >= 5.0 else ("💎" if edge >= 2.0 else "▫️")
+            line_txt = "" if r["Line"] == "---" else f" {r['Line']}"
+            lines.append(
+                f"{icon} **+{r['Edge %']}%** | **{r['Player']}** {r['Side']}{line_txt}\n"
+                f"↳ **{r['Odds']}** @ {r['Bookmaker']} • **{r['Kelly Units']}u** "
+                f"(${r['Bet Amount']}) • *{r['Game']}* • {r['Commence CT']} CT"
+            )
+        part = f" (Part {idx // chunk_size + 1}/{total_chunks})" if total_chunks > 1 else ""
         embed = {
-            "title": f"🚨 +EV Game Line Digest ({len(sorted_plays)} Plays Found){part_tag}",
+            "title": f"🚨 +EV Game Line Digest ({len(plays)} Plays){part}",
             "description": "\n\n".join(lines),
             "color": 16753920,
-            "footer": {"text": f"Scanned at {run_timestamp} CT • Pinnacle Baseline"}
+            "footer": {"text": f"Scanned {run_label} CT • Pinnacle no-vig • min edge {MIN_EDGE_PCT}%"},
         }
-
         try:
             requests.post(DISCORD_WEBHOOK_URL, json={"embeds": [embed]}, timeout=10)
-        except Exception as e:
+        except requests.RequestException as e:
             print(f"Error sending Discord digest: {e}")
 
+
+# ---------- main ----------
 def fetch_and_scan():
     if not API_KEY:
-        print("CRITICAL ERROR: API Key missing.")
+        print("CRITICAL ERROR: ODDS_API_KEY missing.")
         return
-        
-    seen_plays = load_seen_plays()
-    new_plays_to_log = []
-    edges_found = 0
-    
-    run_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"--- Starting EV Game Line Scanner (Run at {run_timestamp}) ---")
-    
-    utc_now = datetime.now(timezone.utc)
-    central_time = utc_now - timedelta(hours=5)
-    today = central_time.date()
-    
-    start_local = datetime(today.year, today.month, today.day, 0, 0, 0, tzinfo=timezone(timedelta(hours=-5)))
-    end_local = datetime(today.year, today.month, today.day, 23, 59, 59, tzinfo=timezone(timedelta(hours=-5)))
-    
-    for sport, markets in SPORTS_CONFIG.items():
-        print(f"\nFetching Odds for {sport}...")
-        
-        target_books = f"pinnacle,{KS_BOOKS}"
-        odds_url = f'https://api.the-odds-api.com/v4/sports/{sport}/odds'
-        odds_params = {'apiKey': API_KEY, 'bookmakers': target_books, 'markets': markets, 'oddsFormat': 'american'}
-        
-        try:
-            odds_res = requests.get(odds_url, params=odds_params, timeout=15)
-        except Exception as e:
-            print(f"Network error fetching odds for {sport}: {e}")
+
+    run_ct = now_ct()
+    run_label = run_ct.strftime("%Y-%m-%d %H:%M:%S")
+    now_utc = datetime.now(timezone.utc)
+    day_start = run_ct.replace(hour=0, minute=0, second=0, microsecond=0)
+    day_end = day_start + timedelta(days=1)
+    print(f"--- EV Game Line Scanner ({run_label} CT) | min edge {MIN_EDGE_PCT}% ---")
+
+    rows = read_log()
+
+    # Dedup: one play per (event, market). Legacy rows (no Event ID) fall back
+    # to (game, market) if logged in the last 2 days.
+    seen = set()
+    legacy_seen = set()
+    pending_by_event = defaultdict(list)
+    legacy_cutoff = (run_ct - timedelta(days=2)).replace(tzinfo=None)
+    for r in rows:
+        if is_separator(r):
             continue
-            
-        if odds_res.status_code != 200:
-            print(f"API Error fetching odds for {sport}: {odds_res.text}")
-            continue
-            
-        events_data = odds_res.json()
-        
-        for event in events_data:
-            game_name = f"{event['away_team']} @ {event['home_team']}"
-            
+        if r["Event ID"]:
+            seen.add((r["Event ID"], r["Market"].lower()))
+            if r["Result"] == "PENDING":
+                pending_by_event[r["Event ID"]].append(r)
+        else:
             try:
-                commence_time = datetime.strptime(event['commence_time'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
-                
-                # Check 1: Ensure the game is scheduled for today (Central Time)
-                if not (start_local.astimezone(timezone.utc) <= commence_time <= end_local.astimezone(timezone.utc)):
-                    continue
-                    
-                # Check 2: STRICT PREGAME FILTER - Skip if the game has already started
-                if commence_time <= datetime.now(timezone.utc):
-                    continue
-                    
-            except Exception:
+                ts = datetime.strptime(r["Timestamp"], "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                ts = legacy_cutoff
+            if ts >= legacy_cutoff:
+                legacy_seen.add((r["Game"].strip().lower(), r["Market"].strip().lower()))
+
+    new_plays = []
+    clv_updates = 0
+    counts = defaultdict(int)
+
+    for sport_key, markets in SPORTS_CONFIG.items():
+        params = {
+            "apiKey": API_KEY,
+            "bookmakers": f"pinnacle,{KS_BOOKS}",
+            "markets": markets,
+            "oddsFormat": "american",
+        }
+        url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
+        try:
+            res = requests.get(url, params=params, timeout=15)
+        except requests.RequestException as e:
+            print(f"{sport_key}: network error {e}")
+            continue
+        if res.status_code != 200:
+            print(f"{sport_key}: API error {res.status_code} {res.text[:200]}")
+            continue
+        remaining = res.headers.get("x-requests-remaining")
+        events = res.json()
+        print(f"\n{sport_key}: {len(events)} events (credits left: {remaining})")
+
+        for event in events:
+            try:
+                commence = parse_iso(event["commence_time"])
+            except (KeyError, ValueError):
                 continue
-                
-            print(f"  -> Scanning {game_name}...")
-            
-            pinny_true = {}
-            for book in event.get('bookmakers', []):
-                if book['key'] == 'pinnacle':
-                    for market in book.get('markets', []):
-                        m_key = market['key']
-                        if len(market['outcomes']) == 2:
-                            o1, o2 = market['outcomes'][0], market['outcomes'][1]
-                            p1 = american_to_prob(o1['price'])
-                            p2 = american_to_prob(o2['price'])
-                            
-                            t1 = p1 / (p1 + p2)
-                            t2 = p2 / (p1 + p2)
-                            
-                            if m_key not in pinny_true: pinny_true[m_key] = {}
-                            
-                            pinny_true[m_key][(o1['name'], o1.get('point'))] = t1
-                            pinny_true[m_key][(o2['name'], o2.get('point'))] = t2
+            if not (day_start <= commence.astimezone(CT) < day_end):
+                continue
+            if commence <= now_utc:
+                continue
 
-            for book in event.get('bookmakers', []):
-                if book['key'] not in ALLOWED_BOOKS: continue
-                book_name = book['title']
-                
-                for market in book.get('markets', []):
-                    m_key = market['key']
-                    if m_key not in pinny_true: continue
-                    
-                    for outcome in market['outcomes']:
-                        name = outcome['name']
-                        pt = outcome.get('point')
-                        avail_odds = outcome['price']
-                        
-                        if avail_odds < 0 and avail_odds < -150:
+            game = f"{event['away_team']} @ {event['home_team']}"
+            state = espn_state(espn_slate(sport_key, day_start.date()),
+                               event["away_team"], event["home_team"], commence)
+            if state in ("in", "post"):
+                print(f"  SKIP {game}: ESPN says '{state}' (API commence {commence:%H:%M} UTC)")
+                counts["espn_live"] += 1
+                continue
+            if state is None and REQUIRE_ESPN_PREGAME:
+                print(f"  SKIP {game}: not found on ESPN")
+                counts["espn_missing"] += 1
+                continue
+
+            fair = pinnacle_fair(event)
+            if not fair:
+                continue
+
+            # Refresh closing-line value for plays already logged on this game
+            clv_updates += update_clv(pending_by_event.get(event["id"], []), fair)
+
+            best = {}
+            for book in event.get("bookmakers", []):
+                if book.get("key") not in ALLOWED_BOOKS:
+                    continue
+                for market in book.get("markets", []):
+                    m_key = market["key"]
+                    if m_key not in fair:
+                        continue
+
+                    pin_lu = fair[m_key]["last_update"]
+                    book_lu = market.get("last_update") or book.get("last_update")
+                    if pin_lu and book_lu and parse_iso(book_lu) - pin_lu > timedelta(minutes=MAX_PINNY_LAG_MIN):
+                        counts["stale_pinny"] += 1
+                        continue
+
+                    for o in market.get("outcomes", []):
+                        name, pt, price = o["name"], o.get("point"), o["price"]
+                        if price < MIN_ODDS or price > MAX_ODDS:
                             continue
-                        if avail_odds > 0 and avail_odds > 200:
+                        if (sport_key.startswith("icehockey") and m_key == "spreads"
+                                and pt is not None and abs(float(pt)) != 1.5):
+                            counts["bad_puckline"] += 1
                             continue
-                        
-                        true_prob = pinny_true[m_key].get((name, pt))
-                        if true_prob is None: continue
+                        true_prob = fair[m_key]["probs"].get((name, pt))
+                        if true_prob is None:
+                            continue
+                        edge = true_prob * american_to_decimal(price) - 1
+                        edge_pct = edge * 100
+                        if edge_pct < MIN_EDGE_PCT:
+                            continue
+                        if edge_pct > MAX_EDGE_PCT:
+                            print(f"  SUSPECT {game} {name} {pt} {price} @ {book['title']}: "
+                                  f"{edge_pct:.1f}% edge, not logged")
+                            counts["suspect"] += 1
+                            continue
+                        if m_key not in best or edge > best[m_key]["edge"]:
+                            best[m_key] = {"name": name, "point": pt, "odds": price,
+                                           "book": book["title"], "true_prob": true_prob,
+                                           "edge": edge}
 
-                        dec_odds = american_to_decimal(avail_odds)
-                        edge = (true_prob * dec_odds) - 1
-                        
-                        if edge > 0:
-                            edges_found += 1
-                            formatted_odds = f"+{avail_odds}" if avail_odds > 0 else str(avail_odds)
-                            
-                            if m_key == 'h2h':
-                                m_display = "Moneyline"
-                                p_display = name
-                                side_display = "ML"
-                                pt_display = "---"
-                            elif m_key == 'spreads':
-                                m_display = "Spread"
-                                p_display = name
-                                side_display = "Spread"
-                                pt_display = str(pt) if pt is not None else "---"
-                            else: 
-                                m_display = "Total"
-                                p_display = "Game Total"
-                                side_display = name 
-                                pt_display = str(pt) if pt is not None else "---"
-                            
-                            dedup_key = (
-                                game_name.strip().lower(), 
-                                m_display.lower(), 
-                                p_display.lower(), 
-                                side_display.lower(), 
-                                pt_display
-                            )
-                            if dedup_key in seen_plays: continue
+            for m_key, cand in best.items():
+                display = MARKET_DISPLAY[m_key].lower()
+                if (event["id"], display) in seen or (game.lower(), display) in legacy_seen:
+                    continue
+                play = build_play(sport_key, event, m_key, cand, run_ct, commence)
+                seen.add((event["id"], display))
+                new_plays.append(play)
+                print(f"  + {play['Edge %']}% {play['Player']} {play['Side']} {play['Line']} "
+                      f"{play['Odds']} @ {play['Bookmaker']}")
 
-                            b = dec_odds - 1
-                            kelly_decimal = (true_prob * b - (1 - true_prob)) / b
-                            
-                            kelly_units = kelly_decimal * 100
-                            quarter_kelly_units = kelly_units / 4
-                            dollar_wager = quarter_kelly_units * UNIT_SIZE
-                            
-                            play_data = {
-                                'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                'game': game_name, 'market': m_display, 'player': p_display,
-                                'side': side_display, 'line': pt_display, 'book': book_name, 'odds': formatted_odds,
-                                'true_prob': f"{true_prob * 100:.1f}", 'edge': f"{edge * 100:.2f}",
-                                'units': f"{quarter_kelly_units:.2f}", 'wager': f"{dollar_wager:.2f}"
-                            }
-                            
-                            seen_plays.add(dedup_key)
-                            new_plays_to_log.append(play_data)
+    if new_plays:
+        if any(not is_separator(r) for r in rows):
+            rows.append(make_separator(f"=== GAMELINE RUN: {run_label} CT ({len(new_plays)} PLAYS FOUND) ==="))
+        rows.extend(new_plays)
+    if new_plays or clv_updates:
+        write_log(rows)
+    send_discord_digest(new_plays, run_label)
 
-    if new_plays_to_log:
-        log_batch_to_csv(new_plays_to_log, run_timestamp)
-        send_discord_digest(new_plays_to_log, run_timestamp)
+    print(f"\nDone. {len(new_plays)} new plays, {clv_updates} CLV updates. "
+          f"Skipped: {dict(counts) if counts else 'none'}")
 
-    print(f"Scan complete. Found {edges_found} active pregame game line edges ({len(new_plays_to_log)} new plays logged & alerted).")
 
 if __name__ == "__main__":
     fetch_and_scan()
