@@ -6,30 +6,36 @@ on:
 permissions:
   contents: write
 
+# Shared with the scanner so only one job writes ev_plays_log.csv at a time
+concurrency:
+  group: ev-log-writer
+  cancel-in-progress: false
+
 jobs:
   grade-plays:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-          
+          python-version: '3.12'
+
       - name: Install dependencies
         run: pip install requests
-        
+
       - name: Run Gameline Grader
         env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: python gameline_grader.py
-        
+
       - name: Commit and Push Settled Bets
         run: |
           git config --global user.name "EV-Gameline-Bot"
           git config --global user.email "bot@example.com"
-          
+
           if [ -f ev_plays_log.csv ]; then
             git add ev_plays_log.csv
             if ! git diff --quiet --cached; then
