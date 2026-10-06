@@ -41,8 +41,15 @@ ESPN_LEAGUES = {
 FIELDNAMES = [
     "Timestamp", "Sport", "Event ID", "Commence CT", "Game", "Market", "Player",
     "Side", "Line", "Bookmaker", "Odds", "True Prob %", "Edge %", "Kelly Units",
-    "Bet Amount", "Close Prob %", "CLV %", "Result", "Net Units", "Flag",
+    "Bet Amount", "Close Prob %", "CLV %", "Close Seen CT", "Result", "Net Units", "Flag",
 ]
+
+# Moneyline and spread are the same "side" of a game: only one gets logged.
+MARKET_GROUP = {"Moneyline": "side", "Spread": "side", "Total": "total"}
+
+# A CLV value only counts as "closing" if Pinnacle was last read within this
+# many minutes of the start time. Older reads are excluded from CLV stats.
+CLOSE_WINDOW_MIN = float(os.environ.get("CLOSE_WINDOW_MIN", "60"))
 
 SEP = "---"
 BUCKET_LABELS = ["1️⃣ **Under 2% Edge**", "2️⃣ **2.0% to 4.99% Edge**", "3️⃣ **5.0%+ Edge**"]
@@ -65,6 +72,21 @@ def american_to_decimal(odds):
 
 def parse_odds(s):
     return float(str(s).replace("+", "").strip())
+
+
+def closing_clv(row, window_min=None):
+    """Return the row's CLV % if it was captured near the close, else None."""
+    window = CLOSE_WINDOW_MIN if window_min is None else window_min
+    if not row.get("CLV %") or not row.get("Close Seen CT") or not row.get("Commence CT"):
+        return None
+    try:
+        seen = datetime.strptime(row["Close Seen CT"], "%Y-%m-%d %H:%M")
+        start = datetime.strptime(row["Commence CT"], "%Y-%m-%d %H:%M")
+        clv = float(row["CLV %"])
+    except ValueError:
+        return None
+    minutes_before = (start - seen).total_seconds() / 60
+    return clv if 0 <= minutes_before <= window else None
 
 
 def edge_bucket(edge_pct):
