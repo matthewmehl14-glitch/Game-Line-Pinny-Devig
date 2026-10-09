@@ -243,3 +243,8 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-08 14:49:33,americanfootball_ncaaf,52f2d012fe3e686087077b0d7083159a,2026-10-08 18:30,South Alabama Jaguars @ Arkansas State Red Wolves,Moneyline,South Alabama Jaguars,ML,---,Novig,+141,42.2,1.74,0.31,7.70,42.2,1.74,2026-10-08 16:24,WIN,0.44,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-08 16:24:43 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-08 16:24:43,icehockey_nhl,89c5018d1ea1a2a1b79d4e805e10be46,2026-10-08 18:10,Vancouver Canucks @ Carolina Hurricanes,Spread,Vancouver Canucks,Spread,1.5,Novig,+122,45.5,1.10,0.23,5.65,45.5,1.10,2026-10-08 16:24,LOSS,-0.23,
+---,---,---,---,=== GAMELINE RUN: 2026-10-09 10:25:00 CT (4 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-09 10:25:00,icehockey_nhl,86ba05a73a0355958b629023b20ba955,2026-10-09 18:10,New York Rangers @ Washington Capitals,Total,Game Total,Under,5.5,Novig,+111,48.1,1.42,0.32,7.99,48.1,1.42,2026-10-09 10:25,PENDING,0.00,
+2026-10-09 10:25:00,icehockey_nhl,48ce8ebb422982764994cd25c5f253c7,2026-10-09 19:10,Anaheim Ducks @ Winnipeg Jets,Moneyline,Anaheim Ducks,ML,---,Novig,+111,48.4,2.07,0.47,11.67,48.4,2.07,2026-10-09 10:25,PENDING,0.00,
+2026-10-09 10:25:00,icehockey_nhl,48ce8ebb422982764994cd25c5f253c7,2026-10-09 19:10,Anaheim Ducks @ Winnipeg Jets,Total,Game Total,Over,6.5,Novig,+111,48.5,2.38,0.54,13.38,48.5,2.38,2026-10-09 10:25,PENDING,0.00,
+2026-10-09 10:25:00,americanfootball_ncaaf,2ec27bbe3b14c521ba8a3f3f6e46f4ac,2026-10-09 20:00,Washington State Cougars @ Utah State Aggies,Spread,Utah State Aggies,Spread,-5.5,Novig,+102,50.2,1.46,0.36,8.96,50.2,1.46,2026-10-09 10:25,PENDING,0.00,
