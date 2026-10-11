@@ -288,3 +288,7 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-10 15:03:52,americanfootball_ncaaf,234d9123fdc010716a5a844efaf7ab43,2026-10-10 19:00,Minnesota Golden Gophers @ Purdue Boilermakers,Total,Game Total,Under,49.5,Novig,+104,49.8,1.55,0.37,9.29,49.8,1.55,2026-10-10 17:34,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-10 17:34:42 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-10 17:34:42,icehockey_nhl,15f36c06476a3c7811b74283878ee66e,2026-10-10 18:40,Tampa Bay Lightning @ New York Islanders,Total,Game Total,Over,5.5,Novig,-102,51.0,1.05,0.27,6.68,51.0,1.05,2026-10-10 17:34,WIN,0.26,
+---,---,---,---,=== GAMELINE RUN: 2026-10-11 07:49:46 CT (3 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-11 07:49:46,basketball_nba_preseason,0036e615f08dd4d7d5d0e5f01edab115,2026-10-11 18:00,Milwaukee Bucks @ Charlotte Hornets,Moneyline,Milwaukee Bucks,ML,---,DraftKings,+150,40.7,1.74,0.29,7.23,40.7,1.74,2026-10-11 07:49,PENDING,0.00,
+2026-10-11 07:49:46,icehockey_nhl,a49ddd8a44071e340299ae7f22b4f359,2026-10-11 18:10,Carolina Hurricanes @ Philadelphia Flyers,Moneyline,Philadelphia Flyers,ML,---,Novig,+170,37.5,1.32,0.19,4.86,37.5,1.32,2026-10-11 07:49,PENDING,0.00,
+2026-10-11 07:49:46,americanfootball_nfl,d1d408fdfd272046fb517fe992a1c5a0,2026-10-11 15:05,Denver Broncos @ Los Angeles Chargers,Moneyline,Los Angeles Chargers,ML,---,Novig,+174,37.2,1.82,0.26,6.54,37.2,1.82,2026-10-11 07:49,PENDING,0.00,
