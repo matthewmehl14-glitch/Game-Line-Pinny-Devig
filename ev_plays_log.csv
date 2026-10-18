@@ -379,3 +379,8 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-17 17:25:20,americanfootball_ncaaf,e45fd12f3d9475fd0941509e7429b596,2026-10-17 18:00,TCU Horned Frogs @ Baylor Bears,Total,Game Total,Under,50.5,Novig,+104,49.6,1.09,0.26,6.56,49.6,1.09,2026-10-17 17:25,WIN,0.27,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-17 19:22:44 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-17 19:22:44,americanfootball_ncaaf,11430b210e5b57c938e1c95a9db5ffb2,2026-10-17 21:00,Ohio Bobcats @ Sacramento State Hornets,Total,Game Total,Over,46.5,Novig,+102,50.4,1.90,0.47,11.64,50.4,1.90,2026-10-17 19:22,WIN,0.48,
+---,---,---,---,=== GAMELINE RUN: 2026-10-18 07:41:29 CT (4 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-18 07:41:29,americanfootball_nfl,84aa9e190e625d7e9cd67e1f157a45b4,2026-10-18 12:00,Tennessee Titans @ Indianapolis Colts,Spread,Tennessee Titans,Spread,6.5,Novig,+100,50.7,1.39,0.35,8.71,50.7,1.39,2026-10-18 07:41,PENDING,0.00,
+2026-10-18 07:41:29,americanfootball_nfl,27f3994841ce8081c0b7349cf3d1e3d7,2026-10-18 12:00,Pittsburgh Steelers @ Tampa Bay Buccaneers,Moneyline,Tampa Bay Buccaneers,ML,---,Novig,+127,45.2,2.59,0.51,12.76,45.2,2.59,2026-10-18 07:41,PENDING,0.00,
+2026-10-18 07:41:29,americanfootball_nfl,3729ac6d2a66b642850caf2044cdc658,2026-10-18 15:05,Arizona Cardinals @ Los Angeles Rams,Total,Game Total,Over,51.5,Novig,+102,50.5,1.93,0.47,11.80,50.5,1.93,2026-10-18 07:41,PENDING,0.00,
+2026-10-18 07:41:29,americanfootball_nfl,82fd5a159fa130e67abab93a9537f70b,2026-10-18 19:20,Dallas Cowboys @ Green Bay Packers,Total,Game Total,Over,53.5,Novig,-102,51.1,1.29,0.33,8.22,51.1,1.29,2026-10-18 07:41,PENDING,0.00,
