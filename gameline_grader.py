@@ -20,7 +20,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 from ev_common import (
-    BUCKET_LABELS, CLOSE_WINDOW_MIN, SPORTS_CONFIG, UNIT_SIZE, american_to_decimal,
+    BUCKET_LABELS, CLOSE_WINDOW_MIN, CreditTracker, SPORTS_CONFIG, UNIT_SIZE, american_to_decimal,
     closing_clv, edge_bucket,
     is_separator, parse_iso, parse_odds, read_log, write_log,
 )
@@ -29,17 +29,18 @@ API_KEY = os.environ.get("ODDS_API_KEY")
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
 
-def fetch_scores(sport_key):
+def fetch_scores(sport_key, credits):
     url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/scores"
     try:
         res = requests.get(url, params={"apiKey": API_KEY, "daysFrom": 3}, timeout=15)
     except requests.RequestException as e:
         print(f"{sport_key}: network error {e}")
         return []
+    credits.record(res)
     if res.status_code != 200:
         print(f"{sport_key}: API error {res.status_code} {res.text[:200]}")
         return []
-    print(f"{sport_key}: scores loaded (credits left: {res.headers.get('x-requests-remaining')})")
+    print(f"{sport_key}: scores loaded (cost {res.headers.get('x-requests-last', '?')}, left {credits.remaining})")
     return res.json()
 
 
@@ -134,7 +135,7 @@ def add_to_stats(stats, row):
         b["clv_n"] += 1
 
 
-def build_digest(batch, lifetime, graded_count, excluded):
+def build_digest(batch, lifetime, graded_count, excluded, credit_line):
     lines = []
     batch_total = life_total = 0.0
     for i, label in enumerate(BUCKET_LABELS):
@@ -154,6 +155,7 @@ def build_digest(batch, lifetime, graded_count, excluded):
     lines.append(f"🏦 **Lifetime Profit:** {life_total:+.2f}u (${life_total * UNIT_SIZE:+.2f})")
     if excluded:
         lines.append(f"🚫 {excluded} flagged plays excluded from stats")
+    lines.append(credit_line)
     title = f"📊 EV Gameline Auto-Grader ({graded_count} New Settlements)"
     return title, "\n".join(lines)
 
@@ -187,9 +189,10 @@ def run_grader():
     if any(not r["Event ID"] for r in pending):
         sports |= set(SPORTS_CONFIG)
 
+    credits = CreditTracker()
     by_id, all_events = {}, []
     for sk in sorted(sports):
-        for ev in fetch_scores(sk):
+        for ev in fetch_scores(sk, credits):
             by_id[ev["id"]] = (sk, ev)
             all_events.append((sk, ev))
 
@@ -230,6 +233,7 @@ def run_grader():
 
     if graded == 0:
         print("No pending plays were ready to grade.")
+        print(credits.line().replace("**", ""))
         return
 
     write_log(rows)
@@ -244,7 +248,7 @@ def run_grader():
             continue
         add_to_stats(lifetime, r)
 
-    title, body = build_digest(batch, lifetime, graded, excluded)
+    title, body = build_digest(batch, lifetime, graded, excluded, credits.line())
     print(f"\n{title}\n{body}")
     send_digest(title, body)
 
