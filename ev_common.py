@@ -93,6 +93,47 @@ def edge_bucket(edge_pct):
     return 0 if edge_pct < 2.0 else (1 if edge_pct < 5.0 else 2)
 
 
+# ---------- Odds API credits ----------
+class CreditTracker:
+    """Reads The Odds API usage headers off each response.
+
+    x-requests-last      = cost of that request
+    x-requests-remaining = credits left this billing period
+    x-requests-used      = credits used this billing period
+    """
+
+    def __init__(self):
+        self.used_run = 0
+        self.calls = 0
+        self.remaining = None
+        self.used_total = None
+
+    @staticmethod
+    def _num(v):
+        try:
+            return int(float(v))
+        except (TypeError, ValueError):
+            return None
+
+    def record(self, res):
+        h = res.headers
+        last = self._num(h.get("x-requests-last"))
+        if last is not None:
+            self.used_run += last
+            self.calls += 1
+        rem = self._num(h.get("x-requests-remaining"))
+        if rem is not None:
+            self.remaining = rem
+        used = self._num(h.get("x-requests-used"))
+        if used is not None:
+            self.used_total = used
+
+    def line(self):
+        rem = f"{self.remaining:,}" if self.remaining is not None else "?"
+        total = f" ({self.used_total:,} used this period)" if self.used_total is not None else ""
+        return f"🪙 **Odds API:** {self.used_run} credits this run • {rem} remaining{total}"
+
+
 # ---------- time ----------
 def parse_iso(s):
     """Parse '2026-10-05T23:00:00Z' / '2026-10-05T23:00Z' into an aware UTC datetime."""
