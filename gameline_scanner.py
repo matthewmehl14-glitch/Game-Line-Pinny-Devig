@@ -24,7 +24,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 from ev_common import (
-    CT, ESPN_LEAGUES, FIELDNAMES, MARKET_GROUP, SPORTS_CONFIG, UNIT_SIZE,
+    CT, ESPN_LEAGUES, FIELDNAMES, CreditTracker, MARKET_GROUP, SPORTS_CONFIG, UNIT_SIZE,
     american_to_decimal, american_to_prob, is_separator, make_separator,
     now_ct, parse_iso, parse_odds, read_log, write_log,
 )
@@ -43,6 +43,8 @@ MAX_ODDS = int(os.environ.get("MAX_ODDS", "200"))
 KELLY_FRACTION = float(os.environ.get("KELLY_FRACTION", "0.25"))
 # 1 = skip any game ESPN can't find. 0 = allow it (commence_time still enforced).
 REQUIRE_ESPN_PREGAME = os.environ.get("REQUIRE_ESPN_PREGAME", "0") == "1"
+# 1 = also post a short Discord message (with credit usage) when a run finds no new plays
+DISCORD_EMPTY_RUNS = os.environ.get("DISCORD_EMPTY_RUNS", "0") == "1"
 
 
 def parse_sport_min_edge(raw):
@@ -52,10 +54,10 @@ def parse_sport_min_edge(raw):
         if "=" not in part:
             continue
         key, val = (x.strip() for x in part.split("=", 1))
-        if key not in SPORTS_CONFIG:
-            print(f"WARNING: SPORT_MIN_EDGE has unknown sport '{key}', ignored")
-            continue
-        out[key] = None if val.lower() == "off" else float(val)
+        try:
+            out[key] = None if val.lower() == "off" else float(val)
+        except ValueError:
+            print(f"WARNING: SPORT_MIN_EDGE value '{val}' for {key} is not a number or 'off', ignored")
     return out
 
 
@@ -245,8 +247,24 @@ def build_play(sport_key, event, m_key, cand, run_ct, commence):
 
 
 # ---------- Discord ----------
-def send_discord_digest(new_plays, run_label):
-    if not DISCORD_WEBHOOK_URL or not new_plays:
+def post_embed(embed):
+    try:
+        requests.post(DISCORD_WEBHOOK_URL, json={"embeds": [embed]}, timeout=10)
+    except requests.RequestException as e:
+        print(f"Error sending Discord message: {e}")
+
+
+def send_discord_digest(new_plays, run_label, credit_line):
+    if not DISCORD_WEBHOOK_URL:
+        return
+    if not new_plays:
+        if DISCORD_EMPTY_RUNS:
+            post_embed({
+                "title": "▫️ Game Line Scan: no new plays",
+                "description": credit_line,
+                "color": 9807270,
+                "footer": {"text": f"Scanned {run_label} CT"},
+            })
         return
     plays = sorted(new_plays, key=lambda r: float(r["Edge %"]), reverse=True)
     chunk_size = 15
@@ -264,16 +282,15 @@ def send_discord_digest(new_plays, run_label):
                 f"(${r['Bet Amount']}) • *{r['Game']}* • {r['Commence CT']} CT"
             )
         part = f" (Part {idx // chunk_size + 1}/{total_chunks})" if total_chunks > 1 else ""
+        if idx + chunk_size >= len(plays):  # last message carries the credit line
+            lines.append(credit_line)
         embed = {
             "title": f"🚨 +EV Game Line Digest ({len(plays)} Plays){part}",
             "description": "\n\n".join(lines),
             "color": 16753920,
             "footer": {"text": f"Scanned {run_label} CT • Pinnacle no-vig • min edge {MIN_EDGE_PCT}%"},
         }
-        try:
-            requests.post(DISCORD_WEBHOOK_URL, json={"embeds": [embed]}, timeout=10)
-        except requests.RequestException as e:
-            print(f"Error sending Discord digest: {e}")
+        post_embed(embed)
 
 
 # ---------- main ----------
@@ -313,11 +330,17 @@ def fetch_and_scan():
                 legacy_seen.add((r["Game"].strip().lower(),
                                  MARKET_GROUP.get(r["Market"].strip(), r["Market"].strip().lower())))
 
+    credits = CreditTracker()
     new_plays = []
     clv_updates = 0
     counts = defaultdict(int)
 
-    for sport_key, markets in SPORTS_CONFIG.items():
+    sports = dict(SPORTS_CONFIG)
+    for key in SPORT_MIN_EDGE:
+        if key not in sports:
+            print(f"NOTE: SPORT_MIN_EDGE lists '{key}', which isn't being scanned this run")
+
+    for sport_key, markets in sports.items():
         min_edge = SPORT_MIN_EDGE.get(sport_key, MIN_EDGE_PCT)
         if min_edge is None:
             print(f"\n{sport_key}: disabled via SPORT_MIN_EDGE")
@@ -334,12 +357,13 @@ def fetch_and_scan():
         except requests.RequestException as e:
             print(f"{sport_key}: network error {e}")
             continue
+        credits.record(res)
         if res.status_code != 200:
             print(f"{sport_key}: API error {res.status_code} {res.text[:200]}")
             continue
-        remaining = res.headers.get("x-requests-remaining")
         events = res.json()
-        print(f"\n{sport_key}: {len(events)} events, min edge {min_edge}% (credits left: {remaining})")
+        print(f"\n{sport_key}: {len(events)} events, min edge {min_edge}% "
+              f"(cost {res.headers.get('x-requests-last', '?')}, left {credits.remaining})")
 
         for event in events:
             try:
@@ -426,8 +450,9 @@ def fetch_and_scan():
         rows.extend(new_plays)
     if new_plays or clv_updates:
         write_log(rows)
-    send_discord_digest(new_plays, run_label)
+    send_discord_digest(new_plays, run_label, credits.line())
 
+    print(credits.line().replace("**", ""))
     print(f"\nDone. {len(new_plays)} new plays, {clv_updates} CLV updates. "
           f"Skipped: {dict(counts) if counts else 'none'}")
 
