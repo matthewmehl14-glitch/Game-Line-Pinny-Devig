@@ -488,3 +488,8 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-25 17:15:15,basketball_nba,dcc4a1c7f0427d8e1b2ee7d3f1d48e8a,2026-10-25 20:00,Memphis Grizzlies @ Sacramento Kings,Moneyline,Sacramento Kings,ML,---,Novig,+147,41.0,1.16,0.20,4.95,40.8,0.76,2026-10-25 19:15,LOSS,-0.20,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-25 20:15:16 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-25 20:15:16,icehockey_nhl,ccf447f1bbe822d28f87352436f70c7c,2026-10-25 21:10,Minnesota Wild @ Vancouver Canucks,Moneyline,Vancouver Canucks,ML,---,Novig,+182,35.8,1.01,0.14,3.48,35.8,1.01,2026-10-25 20:15,LOSS,-0.14,
+---,---,---,---,=== GAMELINE RUN: 2026-10-26 09:15:18 CT (4 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-26 09:15:18,basketball_nba,b57695c11301fc8264db6b94a5ea2485,2026-10-26 19:40,Atlanta Hawks @ Houston Rockets,Moneyline,Atlanta Hawks,ML,---,Novig,+178,36.9,2.57,0.36,9.01,36.9,2.57,2026-10-26 09:15,PENDING,0.00,
+2026-10-26 09:15:18,basketball_nba,fe453388be0a3bc6a39c847479cac46b,2026-10-26 20:10,Memphis Grizzlies @ Utah Jazz,Total,Game Total,Over,238.5,Novig,-102,51.0,1.05,0.27,6.68,51.0,1.05,2026-10-26 09:15,PENDING,0.00,
+2026-10-26 09:15:18,icehockey_nhl,20277c97a62bde35c5494acdb5912a68,2026-10-26 19:40,Toronto Maple Leafs @ Calgary Flames,Total,Game Total,Under,6.5,Novig,+113,47.5,1.17,0.26,6.49,47.5,1.17,2026-10-26 09:15,PENDING,0.00,
+2026-10-26 09:15:18,americanfootball_nfl,4853610e63c246f2027a6a248e642c9a,2026-10-26 19:15,Dallas Cowboys @ Philadelphia Eagles,Moneyline,Philadelphia Eagles,ML,---,Novig,+199,34.0,1.79,0.22,5.62,34.0,1.79,2026-10-26 09:15,PENDING,0.00,
