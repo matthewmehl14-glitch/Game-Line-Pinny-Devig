@@ -514,3 +514,9 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-26 17:15:16,basketball_nba,b57695c11301fc8264db6b94a5ea2485,2026-10-26 19:40,Atlanta Hawks @ Houston Rockets,Total,Game Total,Over,229.5,Novig,+100,50.6,1.14,0.28,7.11,48.5,-2.96,2026-10-26 19:15,WIN,0.28,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 18:15:18 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-26 18:15:18,americanfootball_nfl,4853610e63c246f2027a6a248e642c9a,2026-10-26 19:15,Dallas Cowboys @ Philadelphia Eagles,Total,Game Total,Under,43.5,Novig,+104,50.0,2.00,0.48,12.02,48.3,-1.48,2026-10-26 19:15,LOSS,-0.48,
+---,---,---,---,=== GAMELINE RUN: 2026-10-27 09:15:25 CT (5 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
+2026-10-27 09:15:25,icehockey_nhl,f1b86cba8c192fb71581b00443f4af8a,2026-10-27 18:10,Columbus Blue Jackets @ Philadelphia Flyers,Moneyline,Philadelphia Flyers,ML,---,Novig,+115,47.4,1.86,0.40,10.12,47.4,1.86,2026-10-27 09:15,PENDING,0.00,
+2026-10-27 09:15:25,icehockey_nhl,f1b86cba8c192fb71581b00443f4af8a,2026-10-27 18:10,Columbus Blue Jackets @ Philadelphia Flyers,Total,Game Total,Under,5.5,Novig,+104,49.5,1.07,0.26,6.40,49.5,1.07,2026-10-27 09:15,PENDING,0.00,
+2026-10-27 09:15:25,icehockey_nhl,11d4cfe51153e45bb3a9fc6e5f23535a,2026-10-27 19:08,New Jersey Devils @ Dallas Stars,Total,Game Total,Over,5.5,Novig,-104,51.6,1.23,0.32,7.97,51.6,1.23,2026-10-27 09:15,PENDING,0.00,
+2026-10-27 09:15:25,icehockey_nhl,5f16cb74336431221c132f05c0e31d04,2026-10-27 21:10,Vancouver Canucks @ Anaheim Ducks,Moneyline,Vancouver Canucks,ML,---,Novig,+194,34.9,2.69,0.35,8.65,34.9,2.69,2026-10-27 09:15,PENDING,0.00,
+2026-10-27 09:15:25,icehockey_nhl,288b3a1e5241bd3885295af9aab801ca,2026-10-27 21:40,Buffalo Sabres @ San Jose Sharks,Spread,Buffalo Sabres,Spread,-1.5,Novig,+186,35.5,1.53,0.21,5.13,35.5,1.53,2026-10-27 09:15,PENDING,0.00,
