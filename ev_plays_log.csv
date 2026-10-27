@@ -503,13 +503,13 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-26 11:15:15,icehockey_nhl,20277c97a62bde35c5494acdb5912a68,2026-10-26 19:40,Toronto Maple Leafs @ Calgary Flames,Moneyline,Toronto Maple Leafs,ML,---,Novig,-133,57.8,1.18,0.39,9.81,56.1,-1.81,2026-10-26 19:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 13:15:15 CT (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-26 13:15:15,basketball_wnba,08bda2a9513ed888c66e834f88ddd65f,2026-10-26 19:10,Atlanta Dream @ Golden State Valkyries,Total,Game Total,Over,150.5,Novig,-102,51.1,1.17,0.30,7.43,50.2,-0.55,2026-10-26 18:15,PENDING,0.00,
-2026-10-26 13:15:15,icehockey_nhl,5b70654c977b6cc9a110ad8c04c57cac,2026-10-26 20:40,Detroit Red Wings @ Edmonton Oilers,Moneyline,Detroit Red Wings,ML,---,Novig,+156,39.9,2.19,0.35,8.77,38.1,-2.50,2026-10-26 19:15,PENDING,0.00,
+2026-10-26 13:15:15,icehockey_nhl,5b70654c977b6cc9a110ad8c04c57cac,2026-10-26 20:40,Detroit Red Wings @ Edmonton Oilers,Moneyline,Detroit Red Wings,ML,---,Novig,+156,39.9,2.19,0.35,8.77,39.2,0.24,2026-10-26 20:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 14:15:15 CT (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-26 14:15:15,basketball_wnba,08bda2a9513ed888c66e834f88ddd65f,2026-10-26 19:10,Atlanta Dream @ Golden State Valkyries,Moneyline,Atlanta Dream,ML,---,Novig,+102,50.0,1.00,0.25,6.13,52.6,6.20,2026-10-26 18:15,PENDING,0.00,
 2026-10-26 14:15:15,basketball_nba,fe453388be0a3bc6a39c847479cac46b,2026-10-26 20:10,Memphis Grizzlies @ Utah Jazz,Moneyline,Utah Jazz,ML,---,Novig,-102,51.2,1.32,0.34,8.43,49.1,-2.82,2026-10-26 19:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 16:15:15 CT (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-26 16:15:15,basketball_nba,a423c3941aa43179ca93caf6b689a0ce,2026-10-26 19:10,Indiana Pacers @ Milwaukee Bucks,Spread,Milwaukee Bucks,Spread,4.5,Novig,-102,51.2,1.32,0.34,8.43,51.2,1.32,2026-10-26 17:15,PENDING,0.00,
-2026-10-26 16:15:15,basketball_nba,d7f8398941d7c90befa60f35876a3ae7,2026-10-26 21:10,Golden State Warriors @ Denver Nuggets,Total,Game Total,Over,236.5,Novig,+102,50.2,1.46,0.36,8.96,49.5,0.07,2026-10-26 19:15,PENDING,0.00,
+2026-10-26 16:15:15,basketball_nba,d7f8398941d7c90befa60f35876a3ae7,2026-10-26 21:10,Golden State Warriors @ Denver Nuggets,Total,Game Total,Over,236.5,Novig,+102,50.2,1.46,0.36,8.96,49.5,0.07,2026-10-26 20:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 17:15:16 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-26 17:15:16,basketball_nba,b57695c11301fc8264db6b94a5ea2485,2026-10-26 19:40,Atlanta Hawks @ Houston Rockets,Total,Game Total,Over,229.5,Novig,+100,50.6,1.14,0.28,7.11,48.5,-2.96,2026-10-26 19:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-26 18:15:18 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
