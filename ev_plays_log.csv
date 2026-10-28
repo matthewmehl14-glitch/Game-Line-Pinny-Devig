@@ -519,9 +519,9 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 2026-10-27 09:15:25,icehockey_nhl,f1b86cba8c192fb71581b00443f4af8a,2026-10-27 18:10,Columbus Blue Jackets @ Philadelphia Flyers,Total,Game Total,Under,5.5,Novig,+104,49.5,1.07,0.26,6.40,49.3,0.60,2026-10-27 17:15,PENDING,0.00,
 2026-10-27 09:15:25,icehockey_nhl,11d4cfe51153e45bb3a9fc6e5f23535a,2026-10-27 19:08,New Jersey Devils @ Dallas Stars,Total,Game Total,Over,5.5,Novig,-104,51.6,1.23,0.32,7.97,50.5,-1.02,2026-10-27 18:15,PENDING,0.00,
 2026-10-27 09:15:25,icehockey_nhl,5f16cb74336431221c132f05c0e31d04,2026-10-27 21:10,Vancouver Canucks @ Anaheim Ducks,Moneyline,Vancouver Canucks,ML,---,Novig,+194,34.9,2.69,0.35,8.65,33.7,-0.90,2026-10-27 20:15,PENDING,0.00,
-2026-10-27 09:15:25,icehockey_nhl,288b3a1e5241bd3885295af9aab801ca,2026-10-27 21:40,Buffalo Sabres @ San Jose Sharks,Spread,Buffalo Sabres,Spread,-1.5,Novig,+186,35.5,1.53,0.21,5.13,36.2,3.42,2026-10-27 20:15,PENDING,0.00,
+2026-10-27 09:15:25,icehockey_nhl,288b3a1e5241bd3885295af9aab801ca,2026-10-27 21:40,Buffalo Sabres @ San Jose Sharks,Spread,Buffalo Sabres,Spread,-1.5,Novig,+186,35.5,1.53,0.21,5.13,36.5,4.27,2026-10-27 21:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-27 10:15:16 CT (2 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
-2026-10-27 10:15:16,basketball_nba,82afe4e028b0fbbd9f6cf92697bec6fc,2026-10-27 22:10,Portland Trail Blazers @ Los Angeles Lakers,Moneyline,Portland Trail Blazers,ML,---,Novig,+117,46.7,1.26,0.27,6.71,46.7,1.40,2026-10-27 20:15,PENDING,0.00,
+2026-10-27 10:15:16,basketball_nba,82afe4e028b0fbbd9f6cf92697bec6fc,2026-10-27 22:10,Portland Trail Blazers @ Los Angeles Lakers,Moneyline,Portland Trail Blazers,ML,---,Novig,+117,46.7,1.26,0.27,6.71,47.2,2.34,2026-10-27 21:15,PENDING,0.00,
 2026-10-27 10:15:16,icehockey_nhl,66690f3994b21af39301701a52df1d66,2026-10-27 21:10,Ottawa Senators @ Vegas Golden Knights,Total,Game Total,Over,6.5,Novig,+100,51.1,2.29,0.57,14.33,48.5,-2.96,2026-10-27 20:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-27 11:15:15 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-27 11:15:15,americanfootball_ncaaf,0ae4d3447c72a5c39b523d9b3fbaf216,2026-10-27 18:00,Delaware Blue Hens @ Western Kentucky Hilltoppers,Total,Game Total,Over,57.5,Novig,+104,49.6,1.09,0.26,6.56,49.6,1.09,2026-10-27 11:15,PENDING,0.00,
@@ -539,4 +539,4 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 ---,---,---,---,=== GAMELINE RUN: 2026-10-27 18:15:14 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-27 18:15:14,basketball_nba,9ad8cc650802c0c5c3c23a1f32c3e0f6,2026-10-27 18:40,Brooklyn Nets @ Boston Celtics,Spread,Brooklyn Nets,Spread,12.5,Novig,+106,49.3,1.56,0.37,9.22,49.3,1.56,2026-10-27 18:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-27 20:15:14 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
-2026-10-27 20:15:14,icehockey_nhl,288b3a1e5241bd3885295af9aab801ca,2026-10-27 21:40,Buffalo Sabres @ San Jose Sharks,Total,Game Total,Under,6.5,Novig,+127,44.8,1.77,0.35,8.69,44.8,1.77,2026-10-27 20:15,PENDING,0.00,
+2026-10-27 20:15:14,icehockey_nhl,288b3a1e5241bd3885295af9aab801ca,2026-10-27 21:40,Buffalo Sabres @ San Jose Sharks,Total,Game Total,Under,6.5,Novig,+127,44.8,1.77,0.35,8.69,44.7,1.58,2026-10-27 21:15,PENDING,0.00,
