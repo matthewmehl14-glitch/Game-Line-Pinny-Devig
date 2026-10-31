@@ -606,7 +606,7 @@ Timestamp,Sport,Event ID,Commence CT,Game,Market,Player,Side,Line,Bookmaker,Odds
 ---,---,---,---,=== GAMELINE RUN: 2026-10-30 13:15:15 CT (3 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-30 13:15:15,basketball_nba,45ebc54751ef3e435192eaeb0470acfb,2026-10-30 18:10,Charlotte Hornets @ Washington Wizards,Moneyline,Charlotte Hornets,ML,---,Novig,-104,51.7,1.47,0.38,9.55,50.9,-0.07,2026-10-30 17:15,PENDING,0.00,
 2026-10-30 13:15:15,americanfootball_ncaaf,78b3d38cdfa28649fdd2ca92829569ce,2026-10-30 18:00,Tulane Green Wave @ Charlotte 49ers,Spread,Charlotte 49ers,Spread,8.5,Novig,-102,51.4,1.74,0.44,11.12,51.7,2.40,2026-10-30 17:15,PENDING,0.00,
-2026-10-30 13:15:15,americanfootball_ncaaf,8916ba5e623a0a1d97dd0e7f50e4a205,2026-10-30 21:30,Kent State Golden Flashes @ Sacramento State Hornets,Spread,Kent State Golden Flashes,Spread,-7.5,Novig,+113,48.1,2.38,0.53,13.17,48.1,2.38,2026-10-30 14:15,PENDING,0.00,
+2026-10-30 13:15:15,americanfootball_ncaaf,8916ba5e623a0a1d97dd0e7f50e4a205,2026-10-30 21:30,Kent State Golden Flashes @ Sacramento State Hornets,Spread,Kent State Golden Flashes,Spread,-7.5,Novig,+113,48.1,2.38,0.53,13.17,48.6,3.57,2026-10-30 21:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-30 14:15:14 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
 2026-10-30 14:15:14,icehockey_nhl,5c712e15e1cd4b9283b4bf410fb334f4,2026-10-30 17:10,New Jersey Devils @ Vegas Golden Knights,Moneyline,Vegas Golden Knights,ML,---,Novig,-102,51.2,1.32,0.34,8.43,51.2,1.32,2026-10-30 16:15,PENDING,0.00,
 ---,---,---,---,=== GAMELINE RUN: 2026-10-30 15:15:15 CT (1 PLAYS FOUND) ===,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---,---
