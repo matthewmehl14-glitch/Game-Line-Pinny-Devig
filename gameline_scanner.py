@@ -11,6 +11,8 @@ Changes from v1:
   * One play per game "side" (moneyline OR spread, never both) plus one total:
     best edge across books, and never the opposite side of anything already logged
   * Stores Sport + Event ID so the grader matches by ID, not by name
+  * BOOK_WEIGHTS: second weighted-consensus fair price shown next to Pinnacle's;
+    Discord marks each play ✅ if both models see an edge, ❌ if not
   * SPORT_MIN_EDGE: per-sport edge floors or 'off'
   * CLV: every run refreshes 'Close Prob %' / 'CLV %' on pending plays from the
     latest pregame Pinnacle no-vig price, so the last pregame run = closing line
@@ -32,8 +34,43 @@ from ev_common import (
 API_KEY = os.environ.get("ODDS_API_KEY")
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
-KS_BOOKS = "fanduel,draftkings,betmgm,caesars,espnbet,novig"
+# Books you can bet in Kansas. Caesars' Odds API key is williamhill_us.
+KS_BOOKS = "fanduel,draftkings,betmgm,williamhill_us,espnbet,novig"
 ALLOWED_BOOKS = set(KS_BOOKS.split(","))
+
+
+def parse_weights(raw):
+    out = {}
+    for part in (raw or "").split(","):
+        if "=" not in part:
+            continue
+        key, val = (x.strip() for x in part.split("=", 1))
+        try:
+            if float(val) > 0:
+                out[key] = float(val)
+        except ValueError:
+            print(f"WARNING: BOOK_WEIGHTS value '{val}' for {key} ignored")
+    return out
+
+
+# Second fair-value model, for comparison only (plays are still picked on Pinnacle).
+# Uses only the books already fetched (Pinnacle + KS_BOOKS); weights for any other
+# book are ignored so no extra books are requested.
+FETCH_BOOKS = ",".join(dict.fromkeys(["pinnacle"] + KS_BOOKS.split(",")))
+_raw_weights = parse_weights(os.environ.get(
+    "BOOK_WEIGHTS",
+    "novig=7.5,fanduel=1.1,draftkings=1,pinnacle=1,williamhill_us=0.3,betmgm=0.1",
+))
+_fetched = set(FETCH_BOOKS.split(","))
+for _k in sorted(set(_raw_weights) - _fetched):
+    print(f"NOTE: BOOK_WEIGHTS '{_k}' isn't one of your books, ignored")
+BOOK_WEIGHTS = {k: v for k, v in _raw_weights.items() if k in _fetched}
+# 1 = leave the book you're betting out of its own weighted fair price
+WEIGHTED_EXCLUDE_TARGET = os.environ.get("WEIGHTED_EXCLUDE_TARGET", "1") == "1"
+# Minimum total weight behind a weighted price before it counts
+WEIGHTED_MIN_WEIGHT = float(os.environ.get("WEIGHTED_MIN_WEIGHT", "2.0"))
+# Weighted edge at or above this = the two models agree
+AGREE_MIN_EDGE_PCT = float(os.environ.get("AGREE_MIN_EDGE_PCT", "0.0"))
 
 MIN_EDGE_PCT = float(os.environ.get("MIN_EDGE_PCT", "1.0"))
 MAX_EDGE_PCT = float(os.environ.get("MAX_EDGE_PCT", "15.0"))
@@ -107,6 +144,8 @@ def espn_slate(sport_key, date_ct):
     params = {"dates": date_ct.strftime("%Y%m%d"), "limit": 500}
     if lg == "college-football":
         params["groups"] = "80"  # all FBS, not just featured games
+    elif lg == "mens-college-basketball":
+        params["groups"] = "50"  # all Division I, not just featured games
     url = f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{lg}/scoreboard"
 
     slate = None
@@ -139,11 +178,18 @@ def espn_state(slate, away, home, commence):
     """'pre' / 'in' / 'post', or None if ESPN has no matching game."""
     if not slate:
         return None
-    for g in slate:
-        if abs((g["start"] - commence).total_seconds()) > 6 * 3600:
-            continue
-        if teams_match(away, g["away"]) and teams_match(home, g["home"]):
-            return g["state"]
+    near = [g for g in slate if abs((g["start"] - commence).total_seconds()) <= 6 * 3600]
+
+    def strict(a, b):
+        na, nb = normalize_name(a), normalize_name(b)
+        return bool(na and nb) and (na == nb or na in nb or nb in na)
+
+    # Strict names first (so Kansas never matches Kansas State on a busy college
+    # slate), then loose; among matches, the closest start time wins.
+    for test in (strict, teams_match):
+        hits = [g for g in near if test(away, g["away"]) and test(home, g["home"])]
+        if hits:
+            return min(hits, key=lambda g: abs((g["start"] - commence).total_seconds()))["state"]
     return None
 
 
@@ -170,6 +216,47 @@ def pinnacle_fair(event):
                 "last_update": parse_iso(lu) if lu else None,
             }
     return fair
+
+
+def book_novig(event):
+    """book key -> m_key -> {(name, point): no-vig prob} for every 2-way market."""
+    out = {}
+    for book in event.get("bookmakers", []):
+        for market in book.get("markets", []):
+            outs = market.get("outcomes", [])
+            if len(outs) != 2:
+                continue
+            try:
+                p1 = american_to_prob(outs[0]["price"])
+                p2 = american_to_prob(outs[1]["price"])
+            except (KeyError, TypeError, ValueError, ZeroDivisionError):
+                continue
+            total = p1 + p2
+            if total <= 0:
+                continue
+            out.setdefault(book["key"], {})[market["key"]] = {
+                (outs[0]["name"], outs[0].get("point")): p1 / total,
+                (outs[1]["name"], outs[1].get("point")): p2 / total,
+            }
+    return out
+
+
+def weighted_fair(novig, m_key, key, target_book):
+    """Weighted no-vig prob for one outcome. Returns (prob, total_weight, n_books) or None."""
+    num = den = 0.0
+    n = 0
+    for book_key, w in BOOK_WEIGHTS.items():
+        if WEIGHTED_EXCLUDE_TARGET and book_key == target_book:
+            continue
+        p = novig.get(book_key, {}).get(m_key, {}).get(key)
+        if p is None:
+            continue
+        num += w * p
+        den += w
+        n += 1
+    if den < WEIGHTED_MIN_WEIGHT or n == 0:
+        return None
+    return num / den, den, n
 
 
 def outcome_key_for_row(row):
@@ -221,6 +308,7 @@ def build_play(sport_key, event, m_key, cand, run_ct, commence):
     odds = cand["odds"]
 
     row = {f: "" for f in FIELDNAMES}
+    wf = cand.get("weighted")
     row.update({
         "Timestamp": run_ct.strftime("%Y-%m-%d %H:%M:%S"),
         "Sport": sport_key,
@@ -237,12 +325,23 @@ def build_play(sport_key, event, m_key, cand, run_ct, commence):
         "Edge %": f"{cand['edge'] * 100:.2f}",
         "Kelly Units": f"{units:.2f}",
         "Bet Amount": f"{units * UNIT_SIZE:.2f}",
+        "Weighted Prob %": "",
+        "Weighted Edge %": "",
+        "Weighted Books": "",
+        "Agree": "N",
         "Close Prob %": f"{p * 100:.1f}",
         "CLV %": f"{cand['edge'] * 100:.2f}",
         "Close Seen CT": run_ct.strftime("%Y-%m-%d %H:%M"),
         "Result": "PENDING",
         "Net Units": "0.00",
     })
+    if wf:
+        w_prob, w_total, w_n = wf
+        w_edge = (w_prob * american_to_decimal(odds) - 1) * 100
+        row["Weighted Prob %"] = f"{w_prob * 100:.1f}"
+        row["Weighted Edge %"] = f"{w_edge:.2f}"
+        row["Weighted Books"] = f"{w_n} books, w={w_total:g}"
+        row["Agree"] = "Y" if w_edge >= AGREE_MIN_EDGE_PCT else "N"
     return row
 
 
@@ -275,11 +374,17 @@ def send_discord_digest(new_plays, run_label, credit_line):
         for r in plays[idx:idx + chunk_size]:
             edge = float(r["Edge %"])
             icon = "🔥" if edge >= 5.0 else ("💎" if edge >= 2.0 else "▫️")
+            agree = "✅" if r["Agree"] == "Y" else "❌"
             line_txt = "" if r["Line"] == "---" else f" {r['Line']}"
+            if r["Weighted Edge %"]:
+                w_txt = f"Weighted {float(r['Weighted Edge %']):+.2f}% ({r['Weighted Books']})"
+            else:
+                w_txt = "Weighted n/a (not enough books)"
             lines.append(
-                f"{icon} **+{r['Edge %']}%** | **{r['Player']}** {r['Side']}{line_txt}\n"
+                f"{agree} {icon} **+{r['Edge %']}%** | **{r['Player']}** {r['Side']}{line_txt}\n"
                 f"↳ **{r['Odds']}** @ {r['Bookmaker']} • **{r['Kelly Units']}u** "
-                f"(${r['Bet Amount']}) • *{r['Game']}* • {r['Commence CT']} CT"
+                f"(${r['Bet Amount']}) • *{r['Game']}* • {r['Commence CT']} CT\n"
+                f"↳ Pinny +{r['Edge %']}% • {w_txt}"
             )
         part = f" (Part {idx // chunk_size + 1}/{total_chunks})" if total_chunks > 1 else ""
         if idx + chunk_size >= len(plays):  # last message carries the credit line
@@ -288,7 +393,8 @@ def send_discord_digest(new_plays, run_label, credit_line):
             "title": f"🚨 +EV Game Line Digest ({len(plays)} Plays){part}",
             "description": "\n\n".join(lines),
             "color": 16753920,
-            "footer": {"text": f"Scanned {run_label} CT • Pinnacle no-vig • min edge {MIN_EDGE_PCT}%"},
+            "footer": {"text": f"Scanned {run_label} CT • Pinnacle no-vig • min edge {MIN_EDGE_PCT}% "
+                                f"• ✅ = weighted model agrees"},
         }
         post_embed(embed)
 
@@ -305,6 +411,8 @@ def fetch_and_scan():
     day_start = run_ct.replace(hour=0, minute=0, second=0, microsecond=0)
     day_end = day_start + timedelta(days=1)
     print(f"--- EV Game Line Scanner ({run_label} CT) | min edge {MIN_EDGE_PCT}% ---")
+    print(f"Books: {FETCH_BOOKS} | weights: "
+          + ", ".join(f"{k}={v:g}" for k, v in BOOK_WEIGHTS.items()))
 
     rows = read_log()
 
@@ -347,7 +455,7 @@ def fetch_and_scan():
             continue
         params = {
             "apiKey": API_KEY,
-            "bookmakers": f"pinnacle,{KS_BOOKS}",
+            "bookmakers": FETCH_BOOKS,
             "markets": markets,
             "oddsFormat": "american",
         }
@@ -390,6 +498,7 @@ def fetch_and_scan():
             fair = pinnacle_fair(event)
             if not fair:
                 continue
+            novig = book_novig(event)
 
             # Refresh closing-line value for plays already logged on this game
             clv_updates += update_clv(pending_by_event.get(event["id"], []), fair, run_ct)
@@ -433,16 +542,20 @@ def fetch_and_scan():
                         if group not in best or edge > best[group]["edge"]:
                             best[group] = {"m_key": m_key, "name": name, "point": pt,
                                            "odds": price, "book": book["title"],
+                                           "book_key": book["key"],
                                            "true_prob": true_prob, "edge": edge}
 
             for group, cand in best.items():
                 if (event["id"], group) in seen or (game.lower(), group) in legacy_seen:
                     continue
+                cand["weighted"] = weighted_fair(novig, cand["m_key"], (cand["name"], cand["point"]),
+                                                 cand["book_key"])
                 play = build_play(sport_key, event, cand["m_key"], cand, run_ct, commence)
                 seen.add((event["id"], group))
                 new_plays.append(play)
                 print(f"  + {play['Edge %']}% {play['Player']} {play['Side']} {play['Line']} "
-                      f"{play['Odds']} @ {play['Bookmaker']}")
+                      f"{play['Odds']} @ {play['Bookmaker']} | weighted "
+                      f"{play['Weighted Edge %'] or 'n/a'} {'AGREE' if play['Agree'] == 'Y' else 'DISAGREE'}")
 
     if new_plays:
         if any(not is_separator(r) for r in rows):
