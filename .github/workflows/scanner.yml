@@ -38,6 +38,12 @@ jobs:
           REQUIRE_ESPN_PREGAME: '0'
           # 1 = post a short "no new plays" message with credit usage on empty runs
           DISCORD_EMPTY_RUNS: '0'
+          # Weighted comparison model (✅/❌ in Discord). Odds API keys: Caesars = williamhill_us
+          # Only your books count (pinnacle, novig, fanduel, draftkings, williamhill_us, betmgm, espnbet)
+          BOOK_WEIGHTS: 'novig=7.5,fanduel=1.1,draftkings=1,pinnacle=1,williamhill_us=0.3,betmgm=0.1'
+          WEIGHTED_EXCLUDE_TARGET: '1'   # leave the bet's own book out of its weighted price
+          WEIGHTED_MIN_WEIGHT: '2.0'     # total weight needed before the weighted price counts
+          AGREE_MIN_EDGE_PCT: '0.0'      # weighted edge needed for a ✅
           # Per-sport edge floors or off, e.g. 'americanfootball_ncaaf=2.0,icehockey_nhl_preseason=off'
           SPORT_MIN_EDGE: ''
         run: python gameline_scanner.py
