@@ -135,7 +135,28 @@ def add_to_stats(stats, row):
         b["clv_n"] += 1
 
 
-def build_digest(batch, lifetime, graded_count, excluded, credit_line):
+def agree_split(rows):
+    """Lifetime record for plays with a recorded Agree value, split ✅ / ❌."""
+    split = {"Y": {"W": 0, "L": 0, "P": 0, "units": 0.0, "risked": 0.0},
+             "N": {"W": 0, "L": 0, "P": 0, "units": 0.0, "risked": 0.0}}
+    for r in rows:
+        if r["Agree"] not in split or r["Result"] not in ("WIN", "LOSS", "PUSH"):
+            continue
+        s = split[r["Agree"]]
+        s[r["Result"][0]] += 1
+        s["units"] += float(r["Net Units"] or 0)
+        s["risked"] += float(r["Kelly Units"] or 0)
+    lines = []
+    for key, label in (("Y", "✅ Models agree"), ("N", "❌ Models disagree")):
+        s = split[key]
+        if s["W"] + s["L"] + s["P"] == 0:
+            continue
+        roi = s["units"] / s["risked"] * 100 if s["risked"] else 0.0
+        lines.append(f"{label}: {s['W']}-{s['L']}-{s['P']} | {s['units']:+.2f}u | ROI {roi:+.1f}%")
+    return lines
+
+
+def build_digest(batch, lifetime, graded_count, excluded, credit_line, split_lines=None):
     lines = []
     batch_total = life_total = 0.0
     for i, label in enumerate(BUCKET_LABELS):
@@ -155,6 +176,9 @@ def build_digest(batch, lifetime, graded_count, excluded, credit_line):
     lines.append(f"🏦 **Lifetime Profit:** {life_total:+.2f}u (${life_total * UNIT_SIZE:+.2f})")
     if excluded:
         lines.append(f"🚫 {excluded} flagged plays excluded from stats")
+    if split_lines:
+        lines.append("\n⚖️ **Weighted model check (lifetime)**")
+        lines.extend(split_lines)
     lines.append(credit_line)
     title = f"📊 EV Gameline Auto-Grader ({graded_count} New Settlements)"
     return title, "\n".join(lines)
@@ -240,6 +264,7 @@ def run_grader():
 
     lifetime = new_stats()
     excluded = 0
+    included = []
     for r in rows:
         if is_separator(r):
             continue
@@ -247,8 +272,10 @@ def run_grader():
             excluded += 1
             continue
         add_to_stats(lifetime, r)
+        included.append(r)
 
-    title, body = build_digest(batch, lifetime, graded, excluded, credits.line())
+    title, body = build_digest(batch, lifetime, graded, excluded, credits.line(),
+                               agree_split(included))
     print(f"\n{title}\n{body}")
     send_digest(title, body)
 
