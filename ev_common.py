@@ -25,6 +25,7 @@ SPORTS_CONFIG = {
     "icehockey_nhl_preseason": "h2h,spreads,totals",
     "americanfootball_nfl": "h2h,spreads,totals",
     "americanfootball_ncaaf": "h2h,spreads,totals",
+    "basketball_ncaab": "h2h,spreads,totals",
 }
 
 # Odds API sport key -> ESPN (sport, league) for the pregame status check
@@ -36,12 +37,14 @@ ESPN_LEAGUES = {
     "icehockey_nhl_preseason": ("hockey", "nhl"),
     "americanfootball_nfl": ("football", "nfl"),
     "americanfootball_ncaaf": ("football", "college-football"),
+    "basketball_ncaab": ("basketball", "mens-college-basketball"),
 }
 
 FIELDNAMES = [
     "Timestamp", "Sport", "Event ID", "Commence CT", "Game", "Market", "Player",
     "Side", "Line", "Bookmaker", "Odds", "True Prob %", "Edge %", "Kelly Units",
-    "Bet Amount", "Close Prob %", "CLV %", "Close Seen CT", "Result", "Net Units", "Flag",
+    "Bet Amount", "Weighted Prob %", "Weighted Edge %", "Weighted Books", "Agree",
+    "Close Prob %", "CLV %", "Close Seen CT", "Result", "Net Units", "Flag",
 ]
 
 # Moneyline and spread are the same "side" of a game: only one gets logged.
