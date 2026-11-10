@@ -37,7 +37,7 @@ jobs:
           UNIT_SIZE: '25'
           REQUIRE_ESPN_PREGAME: '0'
           # 1 = post a short "no new plays" message with credit usage on empty runs
-          DISCORD_EMPTY_RUNS: '0'
+          DISCORD_EMPTY_RUNS: '1'
           # Discord filter only (CSV still logs everything). Markets: Moneyline,Spread,Total or ALL
           DISCORD_MARKETS: 'Spread'
           DISCORD_MIN_EDGE_PCT: '2.0'
