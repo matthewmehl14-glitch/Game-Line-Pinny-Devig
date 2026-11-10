@@ -43,7 +43,8 @@ ESPN_LEAGUES = {
 FIELDNAMES = [
     "Timestamp", "Sport", "Event ID", "Commence CT", "Game", "Market", "Player",
     "Side", "Line", "Bookmaker", "Odds", "True Prob %", "Edge %", "Kelly Units",
-    "Bet Amount", "Weighted Prob %", "Weighted Edge %", "Weighted Books", "Agree",
+    "Bet Amount", "Flat Bet", "Flat Net $",
+    "Weighted Prob %", "Weighted Edge %", "Weighted Books", "Agree",
     "Close Prob %", "CLV %", "Close Seen CT", "Result", "Net Units", "Flag",
 ]
 
