@@ -13,6 +13,7 @@ Changes from v1:
   * Stores Sport + Event ID so the grader matches by ID, not by name
   * BOOK_WEIGHTS: second weighted-consensus fair price shown next to Pinnacle's;
     Discord marks each play ✅ if both models see an edge, ❌ if not
+  * FLAT_BET_AMOUNT: flat $ stake on plays that pass the Discord rule
   * SPORT_MIN_EDGE: per-sport edge floors or 'off'
   * CLV: every run refreshes 'Close Prob %' / 'CLV %' on pending plays from the
     latest pregame Pinnacle no-vig price, so the last pregame run = closing line
@@ -82,6 +83,22 @@ KELLY_FRACTION = float(os.environ.get("KELLY_FRACTION", "0.25"))
 REQUIRE_ESPN_PREGAME = os.environ.get("REQUIRE_ESPN_PREGAME", "0") == "1"
 # 1 = also post a short Discord message (with credit usage) when a run finds no new plays
 DISCORD_EMPTY_RUNS = os.environ.get("DISCORD_EMPTY_RUNS", "0") == "1"
+# Discord filter only - every play is still logged to the CSV.
+# Markets to post (Moneyline, Spread, Total, or ALL) and the minimum Pinnacle edge to post.
+DISCORD_MARKETS = {m.strip().lower() for m in
+                   os.environ.get("DISCORD_MARKETS", "Spread").split(",") if m.strip()}
+DISCORD_MIN_EDGE_PCT = float(os.environ.get("DISCORD_MIN_EDGE_PCT", "2.0"))
+
+
+# Flat stake (in dollars) for every play that passes the Discord rule above.
+# Kelly Units / Bet Amount are still logged next to it for comparison. 0 = off.
+FLAT_BET_AMOUNT = float(os.environ.get("FLAT_BET_AMOUNT", "35"))
+
+
+def discord_shows(row):
+    if "all" not in DISCORD_MARKETS and row["Market"].lower() not in DISCORD_MARKETS:
+        return False
+    return float(row["Edge %"]) >= DISCORD_MIN_EDGE_PCT
 
 
 def parse_sport_min_edge(raw):
@@ -342,6 +359,8 @@ def build_play(sport_key, event, m_key, cand, run_ct, commence):
         row["Weighted Edge %"] = f"{w_edge:.2f}"
         row["Weighted Books"] = f"{w_n} books, w={w_total:g}"
         row["Agree"] = "Y" if w_edge >= AGREE_MIN_EDGE_PCT else "N"
+    if FLAT_BET_AMOUNT > 0 and discord_shows(row):
+        row["Flat Bet"] = f"{FLAT_BET_AMOUNT:.2f}"
     return row
 
 
@@ -356,11 +375,15 @@ def post_embed(embed):
 def send_discord_digest(new_plays, run_label, credit_line):
     if not DISCORD_WEBHOOK_URL:
         return
+    hidden = len(new_plays)
+    new_plays = [r for r in new_plays if discord_shows(r)]
+    hidden -= len(new_plays)
+    hidden_line = f"▫️ {hidden} other new plays logged to CSV (not shown)" if hidden else ""
     if not new_plays:
         if DISCORD_EMPTY_RUNS:
             post_embed({
-                "title": "▫️ Game Line Scan: no new plays",
-                "description": credit_line,
+                "title": "▫️ Game Line Scan: no new plays to show",
+                "description": "\n".join(x for x in (hidden_line, credit_line) if x),
                 "color": 9807270,
                 "footer": {"text": f"Scanned {run_label} CT"},
             })
@@ -376,18 +399,25 @@ def send_discord_digest(new_plays, run_label, credit_line):
             icon = "🔥" if edge >= 5.0 else ("💎" if edge >= 2.0 else "▫️")
             agree = "✅" if r["Agree"] == "Y" else "❌"
             line_txt = "" if r["Line"] == "---" else f" {r['Line']}"
+            if r["Flat Bet"]:
+                stake = (f"**${float(r['Flat Bet']):g} flat** "
+                         f"(Kelly {r['Kelly Units']}u / ${r['Bet Amount']})")
+            else:
+                stake = f"**{r['Kelly Units']}u** (${r['Bet Amount']})"
             if r["Weighted Edge %"]:
                 w_txt = f"Weighted {float(r['Weighted Edge %']):+.2f}% ({r['Weighted Books']})"
             else:
                 w_txt = "Weighted n/a (not enough books)"
             lines.append(
                 f"{agree} {icon} **+{r['Edge %']}%** | **{r['Player']}** {r['Side']}{line_txt}\n"
-                f"↳ **{r['Odds']}** @ {r['Bookmaker']} • **{r['Kelly Units']}u** "
-                f"(${r['Bet Amount']}) • *{r['Game']}* • {r['Commence CT']} CT\n"
+                f"↳ **{r['Odds']}** @ {r['Bookmaker']} • {stake} "
+                f"• *{r['Game']}* • {r['Commence CT']} CT\n"
                 f"↳ Pinny +{r['Edge %']}% • {w_txt}"
             )
         part = f" (Part {idx // chunk_size + 1}/{total_chunks})" if total_chunks > 1 else ""
-        if idx + chunk_size >= len(plays):  # last message carries the credit line
+        if idx + chunk_size >= len(plays):  # last message carries the totals
+            if hidden_line:
+                lines.append(hidden_line)
             lines.append(credit_line)
         embed = {
             "title": f"🚨 +EV Game Line Digest ({len(plays)} Plays){part}",
