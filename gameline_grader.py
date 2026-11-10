@@ -135,6 +135,29 @@ def add_to_stats(stats, row):
         b["clv_n"] += 1
 
 
+def flat_stats(rows):
+    st = {"W": 0, "L": 0, "P": 0, "net": 0.0, "staked": 0.0}
+    for r in rows:
+        if not r["Flat Bet"] or r["Result"] not in ("WIN", "LOSS", "PUSH"):
+            continue
+        st[r["Result"][0]] += 1
+        st["net"] += float(r["Flat Net $"] or 0)
+        st["staked"] += float(r["Flat Bet"])
+    return st
+
+
+def flat_lines(batch_rows, lifetime_rows):
+    b, l = flat_stats(batch_rows), flat_stats(lifetime_rows)
+    if l["W"] + l["L"] + l["P"] == 0:
+        return []
+    roi = l["net"] / l["staked"] * 100 if l["staked"] else 0.0
+    return [
+        "\n💵 **Flat bets**",
+        f"**Batch:** {b['W']}-{b['L']}-{b['P']} | ${b['net']:+.2f}",
+        f"**Lifetime:** {l['W']}-{l['L']}-{l['P']} | ${l['net']:+.2f} on ${l['staked']:,.0f} staked | ROI {roi:+.1f}%",
+    ]
+
+
 def agree_split(rows):
     """Lifetime record for plays with a recorded Agree value, split ✅ / ❌."""
     split = {"Y": {"W": 0, "L": 0, "P": 0, "units": 0.0, "risked": 0.0},
@@ -156,7 +179,8 @@ def agree_split(rows):
     return lines
 
 
-def build_digest(batch, lifetime, graded_count, excluded, credit_line, split_lines=None):
+def build_digest(batch, lifetime, graded_count, excluded, credit_line, split_lines=None,
+                 flat=None):
     lines = []
     batch_total = life_total = 0.0
     for i, label in enumerate(BUCKET_LABELS):
@@ -176,6 +200,8 @@ def build_digest(batch, lifetime, graded_count, excluded, credit_line, split_lin
     lines.append(f"🏦 **Lifetime Profit:** {life_total:+.2f}u (${life_total * UNIT_SIZE:+.2f})")
     if excluded:
         lines.append(f"🚫 {excluded} flagged plays excluded from stats")
+    if flat:
+        lines.extend(flat)
     if split_lines:
         lines.append("\n⚖️ **Weighted model check (lifetime)**")
         lines.extend(split_lines)
@@ -221,6 +247,7 @@ def run_grader():
             all_events.append((sk, ev))
 
     batch = new_stats()
+    batch_rows = []
     graded = 0
     for r in pending:
         if r["Event ID"]:
@@ -248,12 +275,22 @@ def run_grader():
         else:
             net = 0.0
         r["Result"], r["Net Units"] = res, f"{net:.2f}"
+        if r["Flat Bet"]:
+            stake = float(r["Flat Bet"])
+            if res == "WIN":
+                flat_net = stake * (american_to_decimal(parse_odds(r["Odds"])) - 1)
+            elif res == "LOSS":
+                flat_net = -stake
+            else:
+                flat_net = 0.0
+            r["Flat Net $"] = f"{flat_net:.2f}"
         if not r["Event ID"]:
             r["Sport"], r["Event ID"] = sk, ev["id"]
         graded += 1
         print(f"Graded: {r['Game']} | {r['Player']} {r['Side']} {r['Line']} -> {score_txt} ({res})")
         if r["Flag"].strip().upper() != "EXCLUDE":
             add_to_stats(batch, r)
+            batch_rows.append(r)
 
     if graded == 0:
         print("No pending plays were ready to grade.")
@@ -275,7 +312,7 @@ def run_grader():
         included.append(r)
 
     title, body = build_digest(batch, lifetime, graded, excluded, credits.line(),
-                               agree_split(included))
+                               agree_split(included), flat_lines(batch_rows, included))
     print(f"\n{title}\n{body}")
     send_digest(title, body)
 
