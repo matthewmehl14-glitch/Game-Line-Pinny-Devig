@@ -38,6 +38,11 @@ jobs:
           REQUIRE_ESPN_PREGAME: '0'
           # 1 = post a short "no new plays" message with credit usage on empty runs
           DISCORD_EMPTY_RUNS: '0'
+          # Discord filter only (CSV still logs everything). Markets: Moneyline,Spread,Total or ALL
+          DISCORD_MARKETS: 'Spread'
+          DISCORD_MIN_EDGE_PCT: '2.0'
+          # Flat $ stake for every play that passes the Discord rule above (0 = off)
+          FLAT_BET_AMOUNT: '35'
           # Weighted comparison model (✅/❌ in Discord). Odds API keys: Caesars = williamhill_us
           # Only your books count (pinnacle, novig, fanduel, draftkings, williamhill_us, betmgm, espnbet)
           BOOK_WEIGHTS: 'novig=7.5,fanduel=1.1,draftkings=1,pinnacle=1,williamhill_us=0.3,betmgm=0.1'
