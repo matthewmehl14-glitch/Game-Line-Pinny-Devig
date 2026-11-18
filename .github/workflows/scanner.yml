@@ -49,6 +49,10 @@ jobs:
           WEIGHTED_EXCLUDE_TARGET: '1'   # leave the bet's own book out of its weighted price
           WEIGHTED_MIN_WEIGHT: '2.0'     # total weight needed before the weighted price counts
           AGREE_MIN_EDGE_PCT: '0.0'      # weighted edge needed for a ✅
+          # Look-ahead cap: only log games starting within N hours. 'off' = no cap for a sport.
+          MAX_LOOKAHEAD_HRS: '5'
+          SPORT_LOOKAHEAD: 'basketball_ncaab=off'
+          LOOKAHEAD_EXEMPT_DISCORD: '1'   # spread >= 2% plays still logged at any look-ahead
           # Per-sport edge floors or off, e.g. 'americanfootball_ncaaf=2.0,icehockey_nhl_preseason=off'
           SPORT_MIN_EDGE: ''
         run: python gameline_scanner.py
