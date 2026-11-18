@@ -14,6 +14,8 @@ Changes from v1:
   * BOOK_WEIGHTS: second weighted-consensus fair price shown next to Pinnacle's;
     Discord marks each play ✅ if both models see an edge, ❌ if not
   * FLAT_BET_AMOUNT: flat $ stake on plays that pass the Discord rule
+  * MAX_LOOKAHEAD_HRS / SPORT_LOOKAHEAD: only log games starting within N hours
+    (NCAAB uncapped by default); Discord-rule plays are exempt
   * SPORT_MIN_EDGE: per-sport edge floors or 'off'
   * CLV: every run refreshes 'Close Prob %' / 'CLV %' on pending plays from the
     latest pregame Pinnacle no-vig price, so the last pregame run = closing line
@@ -117,6 +119,27 @@ def parse_sport_min_edge(raw):
 
 # Per-sport overrides of MIN_EDGE_PCT; 'off' stops scanning that sport (saves credits).
 SPORT_MIN_EDGE = parse_sport_min_edge(os.environ.get("SPORT_MIN_EDGE", ""))
+
+# Look-ahead cap: only log plays on games starting within this many hours.
+# Per-sport overrides use the same 'sport=value' format; 'off' = no cap for that sport.
+MAX_LOOKAHEAD_HRS = float(os.environ.get("MAX_LOOKAHEAD_HRS", "5"))
+SPORT_LOOKAHEAD = parse_sport_min_edge(os.environ.get("SPORT_LOOKAHEAD", "basketball_ncaab=off"))
+# 1 = plays that pass the Discord rule (spread >= 2%) are logged at any look-ahead
+LOOKAHEAD_EXEMPT_DISCORD = os.environ.get("LOOKAHEAD_EXEMPT_DISCORD", "1") == "1"
+
+
+def lookahead_cap(sport_key):
+    """Hours cap for a sport, or None for no cap."""
+    if sport_key in SPORT_LOOKAHEAD:
+        return SPORT_LOOKAHEAD[sport_key]
+    return MAX_LOOKAHEAD_HRS if MAX_LOOKAHEAD_HRS > 0 else None
+
+
+def passes_discord_rule(m_key, edge_pct):
+    market = MARKET_DISPLAY[m_key].lower()
+    if "all" not in DISCORD_MARKETS and market not in DISCORD_MARKETS:
+        return False
+    return edge_pct >= DISCORD_MIN_EDGE_PCT
 
 MARKET_DISPLAY = {"h2h": "Moneyline", "spreads": "Spread", "totals": "Total"}
 DISPLAY_TO_KEY = {v: k for k, v in MARKET_DISPLAY.items()}
@@ -440,7 +463,8 @@ def fetch_and_scan():
     now_utc = datetime.now(timezone.utc)
     day_start = run_ct.replace(hour=0, minute=0, second=0, microsecond=0)
     day_end = day_start + timedelta(days=1)
-    print(f"--- EV Game Line Scanner ({run_label} CT) | min edge {MIN_EDGE_PCT}% ---")
+    print(f"--- EV Game Line Scanner ({run_label} CT) | min edge {MIN_EDGE_PCT}% | "
+          f"look-ahead {MAX_LOOKAHEAD_HRS:g}h (overrides: {SPORT_LOOKAHEAD or 'none'}) ---")
     print(f"Books: {FETCH_BOOKS} | weights: "
           + ", ".join(f"{k}={v:g}" for k, v in BOOK_WEIGHTS.items()))
 
@@ -514,6 +538,12 @@ def fetch_and_scan():
                 continue
 
             game = f"{event['away_team']} @ {event['home_team']}"
+            cap = lookahead_cap(sport_key)
+            hrs_out = (commence - now_utc).total_seconds() / 3600
+            beyond_cap = cap is not None and hrs_out > cap
+            if beyond_cap and not LOOKAHEAD_EXEMPT_DISCORD:
+                counts["beyond_lookahead"] += 1
+                continue
             state = espn_state(espn_slate(sport_key, day_start.date()),
                                event["away_team"], event["home_team"], commence)
             if state in ("in", "post"):
@@ -562,6 +592,9 @@ def fetch_and_scan():
                         edge = true_prob * american_to_decimal(price) - 1
                         edge_pct = edge * 100
                         if edge_pct < min_edge:
+                            continue
+                        if beyond_cap and not passes_discord_rule(m_key, edge_pct):
+                            counts["beyond_lookahead"] += 1
                             continue
                         if edge_pct > MAX_EDGE_PCT:
                             print(f"  SUSPECT {game} {name} {pt} {price} @ {book['title']}: "
